@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E007B52D29BA329C00833E5F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E007B52C29BA329C00833E5F /* LoginViewController.swift */; };
+		E007B52F29BA3AC000833E5F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = E007B52E29BA3AC000833E5F /* README.md */; };
 		E06DF1CF29B90A03004CE7F8 /* Strings+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06DF1CE29B90A03004CE7F8 /* Strings+Generated.swift */; };
 		E06DF1D029B90B3C004CE7F8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E06DF1D229B90B3C004CE7F8 /* Localizable.strings */; };
 		E086BA0B29B8FC1600527E6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E086BA0A29B8FC1600527E6B /* AppDelegate.swift */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		E007B52C29BA329C00833E5F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		E007B52E29BA3AC000833E5F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E06DF1CE29B90A03004CE7F8 /* Strings+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Strings+Generated.swift"; path = "FitnessTracker/SwiftGen/Strings+Generated.swift"; sourceTree = SOURCE_ROOT; };
 		E06DF1D129B90B3C004CE7F8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E06DF1D329B90BCE004CE7F8 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 		E086B9FE29B8FC1600527E6B = {
 			isa = PBXGroup;
 			children = (
+				E007B52E29BA3AC000833E5F /* README.md */,
 				E086BA0929B8FC1600527E6B /* FitnessTracker */,
 				E086BA2029B8FC1700527E6B /* FitnessTrackerTests */,
 				E086BA2A29B8FC1700527E6B /* FitnessTrackerUITests */,
@@ -303,6 +306,7 @@
 			files = (
 				E086BA1729B8FC1700527E6B /* LaunchScreen.storyboard in Resources */,
 				E06DF1D029B90B3C004CE7F8 /* Localizable.strings in Resources */,
+				E007B52F29BA3AC000833E5F /* README.md in Resources */,
 				E086BA1429B8FC1700527E6B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
