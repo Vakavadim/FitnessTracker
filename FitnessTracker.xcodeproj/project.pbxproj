@@ -3,14 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E007B52D29BA329C00833E5F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E007B52C29BA329C00833E5F /* LoginViewController.swift */; };
+		E06DF1CF29B90A03004CE7F8 /* Strings+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06DF1CE29B90A03004CE7F8 /* Strings+Generated.swift */; };
+		E06DF1D029B90B3C004CE7F8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E06DF1D229B90B3C004CE7F8 /* Localizable.strings */; };
 		E086BA0B29B8FC1600527E6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E086BA0A29B8FC1600527E6B /* AppDelegate.swift */; };
 		E086BA0D29B8FC1600527E6B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E086BA0C29B8FC1600527E6B /* SceneDelegate.swift */; };
-		E086BA0F29B8FC1600527E6B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E086BA0E29B8FC1600527E6B /* ViewController.swift */; };
-		E086BA1229B8FC1600527E6B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E086BA1029B8FC1600527E6B /* Main.storyboard */; };
 		E086BA1429B8FC1700527E6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E086BA1329B8FC1700527E6B /* Assets.xcassets */; };
 		E086BA1729B8FC1700527E6B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E086BA1529B8FC1700527E6B /* LaunchScreen.storyboard */; };
 		E086BA2229B8FC1700527E6B /* FitnessTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E086BA2129B8FC1700527E6B /* FitnessTrackerTests.swift */; };
@@ -36,11 +37,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E007B52C29BA329C00833E5F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		E06DF1CE29B90A03004CE7F8 /* Strings+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Strings+Generated.swift"; path = "FitnessTracker/SwiftGen/Strings+Generated.swift"; sourceTree = SOURCE_ROOT; };
+		E06DF1D129B90B3C004CE7F8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E06DF1D329B90BCE004CE7F8 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E086BA0729B8FC1600527E6B /* FitnessTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FitnessTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E086BA0A29B8FC1600527E6B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E086BA0C29B8FC1600527E6B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		E086BA0E29B8FC1600527E6B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		E086BA1129B8FC1600527E6B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E086BA1329B8FC1700527E6B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E086BA1629B8FC1700527E6B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E086BA1829B8FC1700527E6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -76,6 +79,71 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E007B52429BA26D600833E5F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E086BA1829B8FC1700527E6B /* Info.plist */,
+				E086BA0C29B8FC1600527E6B /* SceneDelegate.swift */,
+				E086BA0A29B8FC1600527E6B /* AppDelegate.swift */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E007B52529BA291400833E5F /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				E06DF1D229B90B3C004CE7F8 /* Localizable.strings */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
+		E007B52629BA315500833E5F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E086BA1329B8FC1700527E6B /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		E007B52729BA318500833E5F /* SwiftGen */ = {
+			isa = PBXGroup;
+			children = (
+				E06DF1CE29B90A03004CE7F8 /* Strings+Generated.swift */,
+			);
+			path = SwiftGen;
+			sourceTree = "<group>";
+		};
+		E007B52829BA31EE00833E5F /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				E086BA1529B8FC1700527E6B /* LaunchScreen.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		E007B52929BA321700833E5F /* Business Logic */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Business Logic";
+			sourceTree = "<group>";
+		};
+		E007B52A29BA323400833E5F /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				E007B52B29BA323F00833E5F /* LoginScene */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		E007B52B29BA323F00833E5F /* LoginScene */ = {
+			isa = PBXGroup;
+			children = (
+				E007B52C29BA329C00833E5F /* LoginViewController.swift */,
+			);
+			path = LoginScene;
+			sourceTree = "<group>";
+		};
 		E086B9FE29B8FC1600527E6B = {
 			isa = PBXGroup;
 			children = (
@@ -99,13 +167,13 @@
 		E086BA0929B8FC1600527E6B /* FitnessTracker */ = {
 			isa = PBXGroup;
 			children = (
-				E086BA0A29B8FC1600527E6B /* AppDelegate.swift */,
-				E086BA0C29B8FC1600527E6B /* SceneDelegate.swift */,
-				E086BA0E29B8FC1600527E6B /* ViewController.swift */,
-				E086BA1029B8FC1600527E6B /* Main.storyboard */,
-				E086BA1329B8FC1700527E6B /* Assets.xcassets */,
-				E086BA1529B8FC1700527E6B /* LaunchScreen.storyboard */,
-				E086BA1829B8FC1700527E6B /* Info.plist */,
+				E007B52A29BA323400833E5F /* Scenes */,
+				E007B52829BA31EE00833E5F /* Storyboard */,
+				E007B52929BA321700833E5F /* Business Logic */,
+				E007B52429BA26D600833E5F /* Supporting Files */,
+				E007B52729BA318500833E5F /* SwiftGen */,
+				E007B52529BA291400833E5F /* Localization */,
+				E007B52629BA315500833E5F /* Resources */,
 			);
 			path = FitnessTracker;
 			sourceTree = "<group>";
@@ -137,6 +205,7 @@
 				E086BA0329B8FC1600527E6B /* Sources */,
 				E086BA0429B8FC1600527E6B /* Frameworks */,
 				E086BA0529B8FC1600527E6B /* Resources */,
+				E007B52329BA25C900833E5F /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -207,12 +276,13 @@
 				};
 			};
 			buildConfigurationList = E086BA0229B8FC1600527E6B /* Build configuration list for PBXProject "FitnessTracker" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = E086B9FE29B8FC1600527E6B;
 			productRefGroup = E086BA0829B8FC1600527E6B /* Products */;
@@ -232,8 +302,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E086BA1729B8FC1700527E6B /* LaunchScreen.storyboard in Resources */,
+				E06DF1D029B90B3C004CE7F8 /* Localizable.strings in Resources */,
 				E086BA1429B8FC1700527E6B /* Assets.xcassets in Resources */,
-				E086BA1229B8FC1600527E6B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,13 +323,35 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		E007B52329BA25C900833E5F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nexport PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E086BA0329B8FC1600527E6B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E086BA0F29B8FC1600527E6B /* ViewController.swift in Sources */,
+				E007B52D29BA329C00833E5F /* LoginViewController.swift in Sources */,
 				E086BA0B29B8FC1600527E6B /* AppDelegate.swift in Sources */,
+				E06DF1CF29B90A03004CE7F8 /* Strings+Generated.swift in Sources */,
 				E086BA0D29B8FC1600527E6B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -297,12 +389,13 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		E086BA1029B8FC1600527E6B /* Main.storyboard */ = {
+		E06DF1D229B90B3C004CE7F8 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				E086BA1129B8FC1600527E6B /* Base */,
+				E06DF1D129B90B3C004CE7F8 /* en */,
+				E06DF1D329B90BCE004CE7F8 /* ru */,
 			);
-			name = Main.storyboard;
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		E086BA1529B8FC1700527E6B /* LaunchScreen.storyboard */ = {
@@ -320,6 +413,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -380,6 +474,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -439,12 +534,12 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WSW34L4PSC;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = FitnessTracker/Info.plist;
+				INFOPLIST_FILE = "FitnessTracker/Supporting Files/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -452,9 +547,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Vadim-Gamzaev.FitnessTracker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -467,12 +565,12 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WSW34L4PSC;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = FitnessTracker/Info.plist;
+				INFOPLIST_FILE = "FitnessTracker/Supporting Files/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -480,9 +578,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Vadim-Gamzaev.FitnessTracker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  FitnessTracker
+
+  Created by Вадим Гамзаев on 09.03.2023.
+  
+*/
+
+"title" = "Тестовый текст";
+"secondTitle" = "Второй тест";
