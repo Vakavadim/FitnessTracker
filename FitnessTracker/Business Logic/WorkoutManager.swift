@@ -15,11 +15,11 @@ final class WorkoutManager: IWorkoutManager {
 	}
 	
 	func getWorkoutOf(_ date: Date) -> [Exercise] {
-		return exercises
+		return exercises.filter { $0.date == date }
 	}
 	
 	func isExerciseExist(at date: Date) -> Bool {
-		return false
+		!exercises.filter { $0.date == date }.isEmpty
 	}
 	func addExercise(exercise: Exercise) {
 		exercises.append(exercise)

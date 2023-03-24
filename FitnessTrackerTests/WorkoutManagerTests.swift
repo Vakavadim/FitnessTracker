@@ -21,11 +21,116 @@ final class WorkoutManagerTests: XCTestCase {
 	}
 	
 	// MARK: - getWorkoutOfDate
+	func test_getWorkoutOfDate_withExerciseStub_shouldBeReturnNotEmptyArray() {
+		let sut = makeSut()
+		sut.addExercises(exercises: ExerciseStub.exercises)
+	
+		guard let newDate = Calendar.current.date(byAdding: .day, value: -1, to: Date()) else {
+			fatalError("Date is not exist")
+		}
+		let newExercise = Exercise(
+			name: "TestExercise",
+			workoutDescription: "Description",
+			image: UIImage(),
+			date: newDate
+		)
+		sut.addExercise(exercise: newExercise)
+		
+		let exercisesFromDate = sut.getWorkoutOf(newDate).filter { $0.date == newDate }
+		
+		XCTAssertFalse(
+			exercisesFromDate.isEmpty,
+			"Returned array with exercise of exact date should't be empty"
+		)
+	}
+	
+	func test_getWorkoutOfDate_withAddingExercise_shouldBeReturnEmptyArray() {
+		let sut = makeSut()
+		sut.addExercises(exercises: ExerciseStub.exercises)
+	
+		guard let newDate = Calendar.current.date(byAdding: .day, value: -1, to: Date()) else {
+			fatalError("Date is not exist")
+		}
+		let newExercise = Exercise(
+			name: "TestExercise",
+			workoutDescription: "Description",
+			image: UIImage(),
+			date: newDate
+		)
+		sut.addExercise(exercise: newExercise)
+		
+		let exercisesFromDate = sut.getWorkoutOf(newDate).filter { $0.date != newDate }
+		
+		XCTAssertTrue(
+			exercisesFromDate.isEmpty,
+			"Returned array without exercise of exact date should be empty"
+		)
+	}
+	
+	func test_getWorkoutOfDate_withAddingExercise_returnedArrayShouldContainAddedExercise() {
+		let sut = makeSut()
+		sut.addExercises(exercises: ExerciseStub.exercises)
+		guard let newDate = Calendar.current.date(byAdding: .day, value: -1, to: Date()) else {
+			fatalError("Date is not exist")
+		}
+		let exerciseWithDate = Exercise(
+			name: "TestExercise",
+			workoutDescription: "Description",
+			image: UIImage(),
+			date: newDate
+		)
+		
+		sut.addExercise(exercise: exerciseWithDate)
+		
+		XCTAssertTrue(
+			sut.getWorkoutOf(newDate).contains { $0 === exerciseWithDate },
+			"Returned array without exercise of exact date should be empty"
+		)
+	}
 	
 	// MARK: - isExerciseExistAtDate
-
-	// MARK: - addExercise
+	func test_isExerciseExistAtDate_withInitialState_ShouldReturneFalse() {
+		let sut = makeSut()
+		
+		XCTAssertFalse(
+			sut.isExerciseExist(at: Date()),
+			"The function must return false when exercise isn't exist by date"
+		)
+	}
 	
+	func test_isExerciseExistAtDate_withExerciseWithDate_ShouldReturneTrue() {
+		let sut = makeSut()
+		
+		guard let newDate = Calendar.current.date(byAdding: .day, value: -1, to: Date()) else {
+			fatalError("Date is not exist")
+		}
+		let exerciseWithDate = Exercise(
+			name: "TestExercise",
+			workoutDescription: "Description",
+			image: UIImage(),
+			date: newDate
+		)
+		
+		sut.addExercise(exercise: exerciseWithDate)
+		
+		XCTAssertTrue(
+			sut.isExerciseExist(at: newDate),
+			"The function must return true when exercise is exist by date"
+		)
+	}
+	
+	func test_isExerciseExistAtDate_withExerciseStub_ShouldReturneTrue() {
+		let sut = makeSut()
+		sut.addExercises(exercises: ExerciseStub.exercises)
+		let date = ExerciseStub.exercises[0].date
+		
+		XCTAssertTrue(
+			sut.isExerciseExist(at: date),
+			"The function must return true when exercise is exist by date"
+		)
+	}
+	
+	// MARK: - addExercise
 	func test_addExercise_withAddedNewTask_shouldConteinNewTask() {
 		let sut = makeSut()
 		let exercise = ExerciseStub.exercises[0]
