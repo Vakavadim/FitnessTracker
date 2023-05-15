@@ -9,11 +9,16 @@
 /* Begin PBXBuildFile section */
 		E007B52D29BA329C00833E5F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E007B52C29BA329C00833E5F /* LoginViewController.swift */; };
 		E007B52F29BA3AC000833E5F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = E007B52E29BA3AC000833E5F /* README.md */; };
+		E038FA3429D85E5600597462 /* UIViewController+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = E038FA3329D85E5600597462 /* UIViewController+Preview.swift */; };
+		E038FA3629D85FF900597462 /* Sizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E038FA3529D85FF900597462 /* Sizes.swift */; };
+		E038FA3E29D882C900597462 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E038FA3D29D882C900597462 /* Strings.swift */; };
+		E038FA4129D8833400597462 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = E038FA4029D8833400597462 /* Assets.swift */; };
 		E05A7E4429CD8F8C000EBA1C /* ExerciseStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05A7E4329CD8F8C000EBA1C /* ExerciseStub.swift */; };
+		E05A7E4729CE059A000EBA1C /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05A7E4629CE059A000EBA1C /* CalendarView.swift */; };
 		E068096129CC942100609443 /* IWorkoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E068096029CC942100609443 /* IWorkoutManager.swift */; };
 		E068096329CC943800609443 /* WorkoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E068096229CC943800609443 /* WorkoutManager.swift */; };
-		E06DF1CF29B90A03004CE7F8 /* Strings+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06DF1CE29B90A03004CE7F8 /* Strings+Generated.swift */; };
 		E06DF1D029B90B3C004CE7F8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E06DF1D229B90B3C004CE7F8 /* Localizable.strings */; };
+		E0747A7929DD7FA000012CF4 /* CalendarViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0747A7829DD7FA000012CF4 /* CalendarViewCell.swift */; };
 		E086BA0B29B8FC1600527E6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E086BA0A29B8FC1600527E6B /* AppDelegate.swift */; };
 		E086BA0D29B8FC1600527E6B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E086BA0C29B8FC1600527E6B /* SceneDelegate.swift */; };
 		E086BA1429B8FC1700527E6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E086BA1329B8FC1700527E6B /* Assets.xcassets */; };
@@ -21,6 +26,8 @@
 		E086BA2229B8FC1700527E6B /* WorkoutManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E086BA2129B8FC1700527E6B /* WorkoutManagerTests.swift */; };
 		E086BA2C29B8FC1700527E6B /* FitnessTrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E086BA2B29B8FC1700527E6B /* FitnessTrackerUITests.swift */; };
 		E086BA2E29B8FC1700527E6B /* FitnessTrackerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E086BA2D29B8FC1700527E6B /* FitnessTrackerUITestsLaunchTests.swift */; };
+		E0C2458629DF2485002B00D1 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C2458529DF2485002B00D1 /* CalendarViewModel.swift */; };
+		E0D59FE929D844A90044EA1C /* PinLayout in Frameworks */ = {isa = PBXBuildFile; productRef = E0D59FE829D844A90044EA1C /* PinLayout */; };
 		E0E2F37D29CA1C0C004A7616 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E2F37C29CA1C0C004A7616 /* Exercise.swift */; };
 /* End PBXBuildFile section */
 
@@ -44,12 +51,17 @@
 /* Begin PBXFileReference section */
 		E007B52C29BA329C00833E5F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E007B52E29BA3AC000833E5F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		E038FA3329D85E5600597462 /* UIViewController+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Preview.swift"; sourceTree = "<group>"; };
+		E038FA3529D85FF900597462 /* Sizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sizes.swift; sourceTree = "<group>"; };
+		E038FA3D29D882C900597462 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		E038FA4029D8833400597462 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		E05A7E4329CD8F8C000EBA1C /* ExerciseStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseStub.swift; sourceTree = "<group>"; };
+		E05A7E4629CE059A000EBA1C /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		E068096029CC942100609443 /* IWorkoutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IWorkoutManager.swift; sourceTree = "<group>"; };
 		E068096229CC943800609443 /* WorkoutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutManager.swift; sourceTree = "<group>"; };
-		E06DF1CE29B90A03004CE7F8 /* Strings+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Strings+Generated.swift"; path = "FitnessTracker/SwiftGen/Strings+Generated.swift"; sourceTree = SOURCE_ROOT; };
 		E06DF1D129B90B3C004CE7F8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E06DF1D329B90BCE004CE7F8 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E0747A7829DD7FA000012CF4 /* CalendarViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewCell.swift; sourceTree = "<group>"; };
 		E086BA0729B8FC1600527E6B /* FitnessTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FitnessTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E086BA0A29B8FC1600527E6B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E086BA0C29B8FC1600527E6B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +73,7 @@
 		E086BA2729B8FC1700527E6B /* FitnessTrackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FitnessTrackerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E086BA2B29B8FC1700527E6B /* FitnessTrackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessTrackerUITests.swift; sourceTree = "<group>"; };
 		E086BA2D29B8FC1700527E6B /* FitnessTrackerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessTrackerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		E0C2458529DF2485002B00D1 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
 		E0E2F37C29CA1C0C004A7616 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -69,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0D59FE929D844A90044EA1C /* PinLayout in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,6 +106,7 @@
 		E007B52429BA26D600833E5F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E038FA3F29D882DF00597462 /* Autogenerated */,
 				E086BA1829B8FC1700527E6B /* Info.plist */,
 				E086BA0C29B8FC1600527E6B /* SceneDelegate.swift */,
 				E086BA0A29B8FC1600527E6B /* AppDelegate.swift */,
@@ -115,14 +130,6 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		E007B52729BA318500833E5F /* SwiftGen */ = {
-			isa = PBXGroup;
-			children = (
-				E06DF1CE29B90A03004CE7F8 /* Strings+Generated.swift */,
-			);
-			path = SwiftGen;
-			sourceTree = "<group>";
-		};
 		E007B52829BA31EE00833E5F /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
@@ -134,9 +141,8 @@
 		E007B52929BA321700833E5F /* Business Logic */ = {
 			isa = PBXGroup;
 			children = (
-				E0E2F37C29CA1C0C004A7616 /* Exercise.swift */,
-				E068096029CC942100609443 /* IWorkoutManager.swift */,
-				E068096229CC943800609443 /* WorkoutManager.swift */,
+				E0D59FEA29D85C970044EA1C /* CalendarView */,
+				E0E644582A125287004EE783 /* WorkoutManager */,
 			);
 			path = "Business Logic";
 			sourceTree = "<group>";
@@ -155,6 +161,23 @@
 				E007B52C29BA329C00833E5F /* LoginViewController.swift */,
 			);
 			path = LoginScene;
+			sourceTree = "<group>";
+		};
+		E038FA3729D861E700597462 /* Themes */ = {
+			isa = PBXGroup;
+			children = (
+				E038FA3529D85FF900597462 /* Sizes.swift */,
+			);
+			path = Themes;
+			sourceTree = "<group>";
+		};
+		E038FA3F29D882DF00597462 /* Autogenerated */ = {
+			isa = PBXGroup;
+			children = (
+				E038FA4029D8833400597462 /* Assets.swift */,
+				E038FA3D29D882C900597462 /* Strings.swift */,
+			);
+			path = Autogenerated;
 			sourceTree = "<group>";
 		};
 		E05A7E4229CD8F73000EBA1C /* Tests Doubles */ = {
@@ -193,8 +216,9 @@
 				E007B52829BA31EE00833E5F /* Storyboard */,
 				E007B52929BA321700833E5F /* Business Logic */,
 				E007B52429BA26D600833E5F /* Supporting Files */,
-				E007B52729BA318500833E5F /* SwiftGen */,
 				E007B52529BA291400833E5F /* Localization */,
+				E038FA3729D861E700597462 /* Themes */,
+				E0D59FEB29D85CD60044EA1C /* Extentions */,
 				E007B52629BA315500833E5F /* Resources */,
 			);
 			path = FitnessTracker;
@@ -218,6 +242,34 @@
 			path = FitnessTrackerUITests;
 			sourceTree = "<group>";
 		};
+		E0D59FEA29D85C970044EA1C /* CalendarView */ = {
+			isa = PBXGroup;
+			children = (
+				E05A7E4629CE059A000EBA1C /* CalendarView.swift */,
+				E0747A7829DD7FA000012CF4 /* CalendarViewCell.swift */,
+				E0C2458529DF2485002B00D1 /* CalendarViewModel.swift */,
+			);
+			path = CalendarView;
+			sourceTree = "<group>";
+		};
+		E0D59FEB29D85CD60044EA1C /* Extentions */ = {
+			isa = PBXGroup;
+			children = (
+				E038FA3329D85E5600597462 /* UIViewController+Preview.swift */,
+			);
+			path = Extentions;
+			sourceTree = "<group>";
+		};
+		E0E644582A125287004EE783 /* WorkoutManager */ = {
+			isa = PBXGroup;
+			children = (
+				E0E2F37C29CA1C0C004A7616 /* Exercise.swift */,
+				E068096029CC942100609443 /* IWorkoutManager.swift */,
+				E068096229CC943800609443 /* WorkoutManager.swift */,
+			);
+			path = WorkoutManager;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -225,16 +277,20 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E086BA3129B8FC1700527E6B /* Build configuration list for PBXNativeTarget "FitnessTracker" */;
 			buildPhases = (
+				E007B52329BA25C900833E5F /* Run Script SwiftLint */,
+				E038FA3C29D8789200597462 /* Run Script SwiftGen */,
 				E086BA0329B8FC1600527E6B /* Sources */,
 				E086BA0429B8FC1600527E6B /* Frameworks */,
 				E086BA0529B8FC1600527E6B /* Resources */,
-				E007B52329BA25C900833E5F /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = FitnessTracker;
+			packageProductDependencies = (
+				E0D59FE829D844A90044EA1C /* PinLayout */,
+			);
 			productName = FitnessTracker;
 			productReference = E086BA0729B8FC1600527E6B /* FitnessTracker.app */;
 			productType = "com.apple.product-type.application";
@@ -308,6 +364,9 @@
 				ru,
 			);
 			mainGroup = E086B9FE29B8FC1600527E6B;
+			packageReferences = (
+				E0D59FE729D844A80044EA1C /* XCRemoteSwiftPackageReference "PinLayout" */,
+			);
 			productRefGroup = E086BA0829B8FC1600527E6B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -348,7 +407,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		E007B52329BA25C900833E5F /* ShellScript */ = {
+		E007B52329BA25C900833E5F /* Run Script SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -358,6 +417,7 @@
 			);
 			inputPaths = (
 			);
+			name = "Run Script SwiftLint";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -366,6 +426,27 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nexport PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
+		E038FA3C29D8789200597462 /* Run Script SwiftGen */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script SwiftGen";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(SRCROOT)/FitnessTracker/Supporting Files/Autogenerated/Strings.swift",
+				"$(SRCROOT)/FitnessTracker/Supporting Files/Autogenerated/Assets.swift",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "FitnessTracker/SwiftGen/swiftgen.sh\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -373,12 +454,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E038FA3429D85E5600597462 /* UIViewController+Preview.swift in Sources */,
+				E038FA3E29D882C900597462 /* Strings.swift in Sources */,
+				E038FA4129D8833400597462 /* Assets.swift in Sources */,
+				E0C2458629DF2485002B00D1 /* CalendarViewModel.swift in Sources */,
 				E0E2F37D29CA1C0C004A7616 /* Exercise.swift in Sources */,
 				E068096329CC943800609443 /* WorkoutManager.swift in Sources */,
+				E05A7E4729CE059A000EBA1C /* CalendarView.swift in Sources */,
+				E0747A7929DD7FA000012CF4 /* CalendarViewCell.swift in Sources */,
 				E007B52D29BA329C00833E5F /* LoginViewController.swift in Sources */,
 				E086BA0B29B8FC1600527E6B /* AppDelegate.swift in Sources */,
+				E038FA3629D85FF900597462 /* Sizes.swift in Sources */,
 				E068096129CC942100609443 /* IWorkoutManager.swift in Sources */,
-				E06DF1CF29B90A03004CE7F8 /* Strings+Generated.swift in Sources */,
 				E086BA0D29B8FC1600527E6B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -731,6 +818,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E0D59FE729D844A80044EA1C /* XCRemoteSwiftPackageReference "PinLayout" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/layoutBox/PinLayout";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E0D59FE829D844A90044EA1C /* PinLayout */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E0D59FE729D844A80044EA1C /* XCRemoteSwiftPackageReference "PinLayout" */;
+			productName = PinLayout;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E086B9FF29B8FC1600527E6B /* Project object */;
 }

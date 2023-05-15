@@ -6,12 +6,38 @@
 //
 
 import UIKit
+import PinLayout
 
 class LoginViewController: UIViewController {
+	private lazy var calendarView = makeCalendarView()
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		view.backgroundColor = .white
+		calendarView.backgroundColor = .gray
+	}
+	
+	override func viewDidLayoutSubviews() {
+		super.viewDidLayoutSubviews()
+		layout()
+	}
+}
 
-		view.backgroundColor = .darkGray
+extension LoginViewController {
+	func layout() {
+		view.addSubview(calendarView)
+		
+		calendarView.pin
+			.top()
+			.left()
+			.right()
+		
+		calendarView.updateCollectionViewLayout()
+	}
+	
+	func makeCalendarView() -> CalendarView {
+		let view = CalendarView()
+		
+		return view
 	}
 }

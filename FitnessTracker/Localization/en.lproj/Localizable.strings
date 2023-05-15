@@ -8,3 +8,4 @@
 
 "title" = "TestTitle";
 "secondTitle" = "Second test";
+"CalendarView.WeekDays" = "S M T W T F S";
