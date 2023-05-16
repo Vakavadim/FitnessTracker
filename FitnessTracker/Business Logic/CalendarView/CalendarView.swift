@@ -28,16 +28,21 @@ class CalendarView: UIView {
 	private lazy var resizeButton: UIButton = makeButton()
 	
 	private var isWeekCalendar = false
+	let calendarManager: ICalendarManager
 	
-	private let mounthData = Array(1...36)
-	private let weekData = Array(1...7)
+	private var mounthData = CalendarDataModel.Month(dates: [])
+	private var weekData = CalendarDataModel.Week(dates: [])
 	
 	// MARK: - Lifecycle
 
-	init() {
+	init(calendarManager: ICalendarManager) {
+		self.calendarManager = calendarManager
 		super.init(frame: .zero)
+		mounthData = calendarManager.getDatesForMonthCalendar(date: Date())
+		weekData = calendarManager.getDatesForWeekCalendar(date: Date())
 		setupView()
-		setBounds()	}
+		setBounds()
+	}
 	
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
@@ -89,7 +94,8 @@ class CalendarView: UIView {
 			.pin
 			.left(Sizes.Padding.normal)
 			.right(Sizes.Padding.normal)
-			.above(of: resizeButton)
+			.marginTop(Sizes.Padding.normal)
+			.below(of: weekDays)
 			.marginBottom(Sizes.Padding.minimal)
 			.height(collectionView.contentSize.height)
 	}
@@ -98,7 +104,9 @@ class CalendarView: UIView {
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 extension CalendarView: UICollectionViewDelegate, UICollectionViewDataSource {
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		isWeekCalendar ? weekData.count : mounthData.count
+		isWeekCalendar
+		? weekData.dates.count
+		: mounthData.dates.count
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -107,9 +115,9 @@ extension CalendarView: UICollectionViewDelegate, UICollectionViewDataSource {
 			for: indexPath
 		)
 		guard let cell = cell as? CalendarViewCell else { return UICollectionViewCell() }
-		let data = isWeekCalendar ? weekData : mounthData
+//		let data = isWeekCalendar ? weekData : mounthData
 
-		cell.configure(title: data[indexPath.item].formatted())
+		cell.configure(title: "11")
 		return cell
 	}
 }
@@ -256,7 +264,7 @@ private extension CalendarView {
 // MARK: - Preview
 
 class TestViewController: UIViewController {
-	let calendarView = CalendarView()
+	let calendarView = CalendarView(calendarManager: CalendarManager())
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()

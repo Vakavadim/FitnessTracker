@@ -251,8 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				E05A7E4629CE059A000EBA1C /* CalendarView.swift */,
-				E0747A7829DD7FA000012CF4 /* CalendarViewCell.swift */,
-				E0C2458529DF2485002B00D1 /* CalendarViewModel.swift */,
+				E0E6445E2A13C9C2004EE783 /* CalendarCell */,
 			);
 			path = CalendarView;
 			sourceTree = "<group>";
@@ -282,6 +281,15 @@
 				E0E6445C2A13B48F004EE783 /* CalendarManagerDataModel.swift */,
 			);
 			path = CalendarService;
+			sourceTree = "<group>";
+		};
+		E0E6445E2A13C9C2004EE783 /* CalendarCell */ = {
+			isa = PBXGroup;
+			children = (
+				E0747A7829DD7FA000012CF4 /* CalendarViewCell.swift */,
+				E0C2458529DF2485002B00D1 /* CalendarViewModel.swift */,
+			);
+			path = CalendarCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

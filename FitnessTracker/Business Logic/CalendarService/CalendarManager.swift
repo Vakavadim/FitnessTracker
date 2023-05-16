@@ -13,7 +13,7 @@ protocol ICalendarManager {
 	func getDatesForMonthCalendar(date: Date) -> CalendarDataModel.Month
 }
 
-final class CalendarManager {
+final class CalendarManager: ICalendarManager {
 	
 	// MARK: - Private properties
 	
@@ -144,11 +144,11 @@ final class CalendarManager {
 	private func getDatesOfCurrentMonthForMonthCalendar(date: Date) -> [Date] {
 		var dates: [Date] = []
 		var current = firstDayOfMonth(date: date)
-		var nextMonth = addMonth(date: current, month: 1)
+		let nextMonth = addMonth(date: current, month: 1)
 		
 		while current < nextMonth {
 			dates.append(current)
-			current = addDay(date: current, days: -1)
+			current = addDay(date: current, days: 1)
 		}
 		
 		return dates
@@ -160,7 +160,7 @@ final class CalendarManager {
 		var dates: [Date] = []
 		var current = firstDayOfMonth(date: date)
 		
-		while getWeekDayIndexOf(date: current) == Weekdays.sunday.rawValue {
+		while getWeekDayIndexOf(date: current) != Weekdays.sunday.rawValue {
 			current = addDay(date: current, days: -1)
 			dates.insert(current, at: 0)
 		}
@@ -173,7 +173,7 @@ final class CalendarManager {
 		var dates: [Date] = []
 		var current = lastDayOfMonth(date: date)
 		
-		while getWeekDayIndexOf(date: current) == Weekdays.saturday.rawValue {
+		while getWeekDayIndexOf(date: current) != Weekdays.saturday.rawValue {
 			current = addDay(date: current, days: 1)
 			dates.append(current)
 		}
@@ -214,11 +214,7 @@ final class CalendarManager {
 		let currentMonthDates = getDatesOfCurrentMonthForMonthCalendar(date: date)
 		let nextMonthDates = getDatesOfNextMonthCalendar(date: date)
 		
-		return CalendarDataModel.Month(
-			previusMonthDates: previusMonthDates,
-			currentMonthDates: currentMonthDates,
-			nextMonthDates: nextMonthDates
-		)
+		return CalendarDataModel.Month(dates: previusMonthDates + currentMonthDates + nextMonthDates)
 	}
 }
 
