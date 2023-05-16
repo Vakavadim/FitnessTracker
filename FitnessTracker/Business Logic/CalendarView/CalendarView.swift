@@ -80,7 +80,8 @@ class CalendarView: UIView {
 		updateCollectionViewLayout()
 	}
 	
-	/// Метод updateCollectionViewLayout обнавляет данные Calendar CollectionView и должен быть вызван в методе viewDidLayoutSubviews() родительского ViewController.
+	/// Метод updateCollectionViewLayout обнавляет данные Calendar CollectionView
+	///  и должен быть вызван в методе viewDidLayoutSubviews() родительского ViewController.
 	func updateCollectionViewLayout() {
 		collectionView.reloadData()
 		collectionView.layoutIfNeeded()

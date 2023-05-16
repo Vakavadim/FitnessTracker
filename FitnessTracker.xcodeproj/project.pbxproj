@@ -29,6 +29,8 @@
 		E0C2458629DF2485002B00D1 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C2458529DF2485002B00D1 /* CalendarViewModel.swift */; };
 		E0D59FE929D844A90044EA1C /* PinLayout in Frameworks */ = {isa = PBXBuildFile; productRef = E0D59FE829D844A90044EA1C /* PinLayout */; };
 		E0E2F37D29CA1C0C004A7616 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E2F37C29CA1C0C004A7616 /* Exercise.swift */; };
+		E0E6445B2A127C93004EE783 /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E6445A2A127C93004EE783 /* CalendarManager.swift */; };
+		E0E6445D2A13B48F004EE783 /* CalendarManagerDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E6445C2A13B48F004EE783 /* CalendarManagerDataModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +77,8 @@
 		E086BA2D29B8FC1700527E6B /* FitnessTrackerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessTrackerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		E0C2458529DF2485002B00D1 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
 		E0E2F37C29CA1C0C004A7616 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
+		E0E6445A2A127C93004EE783 /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
+		E0E6445C2A13B48F004EE783 /* CalendarManagerDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManagerDataModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +145,7 @@
 		E007B52929BA321700833E5F /* Business Logic */ = {
 			isa = PBXGroup;
 			children = (
+				E0E644592A127C57004EE783 /* CalendarService */,
 				E0D59FEA29D85C970044EA1C /* CalendarView */,
 				E0E644582A125287004EE783 /* WorkoutManager */,
 			);
@@ -268,6 +273,15 @@
 				E068096229CC943800609443 /* WorkoutManager.swift */,
 			);
 			path = WorkoutManager;
+			sourceTree = "<group>";
+		};
+		E0E644592A127C57004EE783 /* CalendarService */ = {
+			isa = PBXGroup;
+			children = (
+				E0E6445A2A127C93004EE783 /* CalendarManager.swift */,
+				E0E6445C2A13B48F004EE783 /* CalendarManagerDataModel.swift */,
+			);
+			path = CalendarService;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -457,6 +471,8 @@
 				E038FA3429D85E5600597462 /* UIViewController+Preview.swift in Sources */,
 				E038FA3E29D882C900597462 /* Strings.swift in Sources */,
 				E038FA4129D8833400597462 /* Assets.swift in Sources */,
+				E0E6445B2A127C93004EE783 /* CalendarManager.swift in Sources */,
+				E0E6445D2A13B48F004EE783 /* CalendarManagerDataModel.swift in Sources */,
 				E0C2458629DF2485002B00D1 /* CalendarViewModel.swift in Sources */,
 				E0E2F37D29CA1C0C004A7616 /* Exercise.swift in Sources */,
 				E068096329CC943800609443 /* WorkoutManager.swift in Sources */,
