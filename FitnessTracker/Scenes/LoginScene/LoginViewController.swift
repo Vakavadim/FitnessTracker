@@ -13,8 +13,7 @@ class LoginViewController: UIViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		view.backgroundColor = .white
-		calendarView.backgroundColor = .gray
+		view.backgroundColor = .lightGray
 	}
 	
 	override func viewDidLayoutSubviews() {
@@ -36,7 +35,7 @@ extension LoginViewController {
 	}
 	
 	func makeCalendarView() -> CalendarView {
-		let view = CalendarView(calendarManager: CalendarManager())
+		let view = CalendarView()
 		
 		return view
 	}

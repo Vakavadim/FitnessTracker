@@ -8,11 +8,6 @@
 import Foundation
 
 enum CalendarDataModel {
-	struct Week {
-		let dates: [Date]
-	}
-	
-	struct Month {
-		let dates: [Date]
-	}
+	case currentMonthDay(Date)
+	case otherMonthDay(Date)
 }

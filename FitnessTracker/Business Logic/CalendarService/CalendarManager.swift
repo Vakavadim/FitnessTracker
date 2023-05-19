@@ -9,8 +9,9 @@ import Foundation
 
 protocol ICalendarManager {
 	func makeDateWithDefaultTime(date: Date) -> Date
-	func getDatesForWeekCalendar(date: Date) -> CalendarDataModel.Week
-	func getDatesForMonthCalendar(date: Date) -> CalendarDataModel.Month
+	func getDatesForWeekCalendar(date: Date) -> [CalendarDataModel]
+	func getDatesForMonthCalendar(date: Date) -> [CalendarDataModel]
+	func getMonthAndYearString(date: Date) -> String
 }
 
 final class CalendarManager: ICalendarManager {
@@ -183,6 +184,10 @@ final class CalendarManager: ICalendarManager {
 	
 	// MARK: - Public methods
 	
+	func getMonthAndYearString(date: Date) -> String {
+		return monthStringOf(date: date) + " " + yearStringOf(date: date)
+	}
+	
 	/// Метод makeDateWithDefaultTime преобразует date в date с идентичными
 	///  для всех хранимых данных о дате параметрами времени.
 	func makeDateWithDefaultTime(date: Date) -> Date {
@@ -194,27 +199,28 @@ final class CalendarManager: ICalendarManager {
 	}
 	
 	/// Метод getDatesForWeekCalendar возвращает массив дат текущей недели.
-	func getDatesForWeekCalendar(date: Date) -> CalendarDataModel.Week {
+	func getDatesForWeekCalendar(date: Date) -> [CalendarDataModel] {
 		let date = makeDateWithDefaultTime(date: date)
-		var dates: [Date] = []
+		var dates: [CalendarDataModel] = []
 		var current = sundayForDate(date: date)
 		let nextSunday = addDay(date: current, days: 7)
 		
 		while current < nextSunday {
-			dates.append(current)
+			dates.append(CalendarDataModel.currentMonthDay(current))
 			current = addDay(date: current, days: 1)
 		}
-		return CalendarDataModel.Week(dates: dates)
+		return dates
 	}
 	
 	/// Метод getDatesForWeekCalendar возвращает массив дат для отображения месячного представления календаря.
-	func getDatesForMonthCalendar(date: Date) -> CalendarDataModel.Month {
+	func getDatesForMonthCalendar(date: Date) -> [CalendarDataModel] {
 		let date = makeDateWithDefaultTime(date: date)
-		let previusMonthDates = getDatesOfPreviusMonthCalendar(date: date)
+		let previusMonthDates = getDatesOfPreviusMonthCalendar(date: date).map { CalendarDataModel.otherMonthDay($0) }
 		let currentMonthDates = getDatesOfCurrentMonthForMonthCalendar(date: date)
-		let nextMonthDates = getDatesOfNextMonthCalendar(date: date)
+			.map { CalendarDataModel.currentMonthDay($0) }
+		let nextMonthDates = getDatesOfNextMonthCalendar(date: date).map { CalendarDataModel.otherMonthDay($0) }
 		
-		return CalendarDataModel.Month(dates: previusMonthDates + currentMonthDates + nextMonthDates)
+		return previusMonthDates + currentMonthDates + nextMonthDates
 	}
 }
 

@@ -8,39 +8,55 @@
 import UIKit
 import PinLayout
 
-class CalendarViewCell: UICollectionViewCell {
-	static let reuseIdentifier = "CalendarViewCell"
+class OtherMonthDayCell: UICollectionViewCell {
+	static let reuseIdentifier = "OtherMonthDayCell"
+	
+	// MARK: - Private properties
 
 	private lazy var titleLabel: UILabel = makeLabel()
 	private lazy var indicatorView: UIView = makeView()
 	
-	 // MARK: - Initializers
+	// MARK: - Lifecycle
+	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 		setupView()
+		indicatorView.isHidden = true
 	}
 
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
 
-	private func setupView() {
-		contentView.addSubview(indicatorView)
-		contentView.addSubview(titleLabel)
-	}
-
 	override func layoutSubviews() {
 		super.layoutSubviews()
 		layout()
 	}
+	
+	// MARK: - Private methods
 
-	func configure(title: String) {
-		titleLabel.text = title
+	private func setupView() {
+		contentView.addSubview(indicatorView)
+		contentView.addSubview(titleLabel)
+	}
+	
+	// MARK: - Public methods
+
+	func configure(dayData: CalendarModel.DayData) {
+		let dateFormator = DateFormatter()
+		dateFormator.dateFormat = "d"
+		titleLabel.text = dateFormator.string(from: dayData.date)
+		if dayData.isCurrent {
+			indicatorView.isHidden = false
+		} else {
+			indicatorView.isHidden = true
+		}
 	}
 }
 
 // MARK: - Layout
-private extension CalendarViewCell {
+
+private extension OtherMonthDayCell {
 	func layout() {
 		indicatorView
 			.pin
@@ -64,7 +80,7 @@ private extension CalendarViewCell {
 	func makeLabel() -> UILabel {
 		let label = UILabel()
 		label.font = UIFont.systemFont(ofSize: 16)
-		label.textColor = .black
+		label.textColor = .gray
 		label.textAlignment = .center
 		return label
 	}
