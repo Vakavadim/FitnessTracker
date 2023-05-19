@@ -41,7 +41,7 @@ class CurrentMonthDayCell: UICollectionViewCell {
 
 	func configure(dayData: CalendarModel.DayData) {
 		let dateFormator = DateFormatter()
-		dateFormator.dateFormat = "dd"
+		dateFormator.dateFormat = "d"
 		titleLabel.text = dateFormator.string(from: dayData.date)
 		if dayData.isCurrent {
 			indicatorView.isHidden = false

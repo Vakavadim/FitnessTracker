@@ -46,6 +46,7 @@ class CalendarView: UIView {
 		presenter.viewIsReady()
 		setupView()
 		setBounds()
+		self.dateLabel.text = viewData.dateString
 	}
 	
 	required init?(coder: NSCoder) {
@@ -71,6 +72,7 @@ class CalendarView: UIView {
 		self.addSubview(collectionView)
 		self.addSubview(resizeButton)
 		self.backgroundColor = .white
+		
 		collectionView.dataSource = self
 		collectionView.delegate = self
 		
@@ -92,7 +94,6 @@ class CalendarView: UIView {
 	
 	/// Метод changeCalendarSize меняет значение переменной isWeekCalendar,
 	@objc func changeCalendarSize() {
-//		setCalendarData()
 		setBounds()
 		layout()
 		updateCollectionViewLayout()
