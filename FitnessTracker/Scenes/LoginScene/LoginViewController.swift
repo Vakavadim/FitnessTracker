@@ -35,7 +35,7 @@ extension LoginViewController {
 	}
 	
 	func makeCalendarView() -> CalendarView {
-		let view = CalendarView(calendarManager: CalendarManager())
+		let view = CalendarView()
 		
 		return view
 	}

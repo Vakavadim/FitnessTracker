@@ -19,7 +19,7 @@ protocol CalendarViewData {
 }
 
 protocol ICalendarView: AnyObject {
-	func render(viewData: CalendarViewModel)
+	func render(viewData: CalendarModel.ViewModel)
 }
 
 class CalendarView: UIView {
@@ -30,24 +30,20 @@ class CalendarView: UIView {
 	private lazy var weekDays: UIStackView = makeWeekDaysStack()
 	private lazy var collectionView: UICollectionView = makeCollectionView()
 	private lazy var resizeButton: UIButton = makeButton()
-	private var isWeekCalendar = false
-	let calendarManager: ICalendarManager
-	private var currentDate: Date {
-		didSet {
-			setSelectedDate(date: currentDate)
-		}
-	}
 	
-	private var viewData = CalendarViewModel(calendarDays: [])
-	private var daysData: [CalendarDataModel] = []
+	private var presenter: ICalendarPresenter! // swiftlint:disable:this implicitly_unwrapped_optional
+	private var viewData = CalendarModel.ViewModel(
+			dateString: " ",
+			calendarViewSize: CGRect(),
+			calendarDays: []
+	)
 	
 	// MARK: - Lifecycle
 
-	init(calendarManager: ICalendarManager, selectedDate: Date = Date()) {
-		self.calendarManager = calendarManager
-		self.currentDate = calendarManager.makeDateWithDefaultTime(date: Date())
+	init() {
 		super.init(frame: .zero)
-		setCalendarData()
+		assemble()
+		presenter.viewIsReady()
 		setupView()
 		setBounds()
 	}
@@ -62,6 +58,11 @@ class CalendarView: UIView {
 	}
 	
 	// MARK: - Private methods
+	
+	private func assemble() {
+		let calendarManager = CalendarManager()
+		self.presenter = CalendarPresenter(view: self, calendarManager: calendarManager)
+	}
 	
 	/// Add Subviews and setup collectionView.
 	private func setupView() {
@@ -84,33 +85,14 @@ class CalendarView: UIView {
 		)
 	}
 	
-	private func setCalendarData() {
-		daysData = isWeekCalendar
-		? calendarManager.getDatesForWeekCalendar(date: currentDate)
-		: calendarManager.getDatesForMonthCalendar(date: currentDate)
-		dateLabel.text = calendarManager.getMonthAndYearString(date: currentDate)
-	}
-	
 	/// Метод setBounds устанваливает значения Bounds для CalendarView в зависимости от значения isWeekCalendar.
 	private func setBounds() {
-		self.bounds = isWeekCalendar ?
-		Sizes.CalendarView.weekViewSize : Sizes.CalendarView.mounthViewSize
-	}
-	
-	private func setSelectedDate(date: Date) {
-		let userDefaults = UserDefaults()
-		userDefaults.set(date, forKey: "selectedDate")
-	}
-	
-	private func unsetSelectedDate() {
-		let userDefaults = UserDefaults()
-		userDefaults.removeObject(forKey: "selectedDate")
+		self.bounds = viewData.calendarViewSize
 	}
 	
 	/// Метод changeCalendarSize меняет значение переменной isWeekCalendar,
 	@objc func changeCalendarSize() {
-		isWeekCalendar.toggle()
-		setCalendarData()
+//		setCalendarData()
 		setBounds()
 		layout()
 		updateCollectionViewLayout()
@@ -135,28 +117,16 @@ class CalendarView: UIView {
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 extension CalendarView: UICollectionViewDelegate, UICollectionViewDataSource {
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		daysData.count
+		viewData.calendarDays.count
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		switch daysData[indexPath.item] {
-		case .currentMonthDay(let date):
-			let cell = collectionView.dequeueReusableCell(
-				withReuseIdentifier: CurrentMonthDayCell.reuseIdentifier,
-				for: indexPath
-			)
-			guard let cell = cell as? CurrentMonthDayCell else { return UICollectionViewCell() }
-			cell.configure(date: date, selectedDate: self.currentDate)
-			return cell
-		case .otherMonthDay(let date):
-			let cell = collectionView.dequeueReusableCell(
-				withReuseIdentifier: OtherMonthDayCell.reuseIdentifier,
-				for: indexPath
-			)
-			guard let cell = cell as? OtherMonthDayCell else { return UICollectionViewCell() }
-			cell.configure(date: date, selectedDate: self.currentDate)
-			return cell
-		}
+		let cell = CalendarCellFactory.cellForCollectionView(
+			collectionView,
+			indexPath: indexPath,
+			model: self.viewData.calendarDays[indexPath.item]
+		)
+		return cell
 	}
 }
 
@@ -192,8 +162,9 @@ extension CalendarView: UICollectionViewDelegateFlowLayout {
 	}
 }
 
+// MARK: - ICalendarView
 extension CalendarView: ICalendarView {
-	func render(viewData: CalendarViewModel) {
+	func render(viewData: CalendarModel.ViewModel) {
 		self.viewData = viewData
 		collectionView.reloadData()
 	}
@@ -309,7 +280,7 @@ private extension CalendarView {
 // MARK: - Preview
 
 class TestViewController: UIViewController {
-	let calendarView = CalendarView(calendarManager: CalendarManager())
+	let calendarView = CalendarView()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()

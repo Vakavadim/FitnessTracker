@@ -7,17 +7,23 @@
 
 import Foundation
 
-struct CalendarViewModel {
-	struct Day {
+struct CalendarModel {
+	struct DayData {
 		let date: Date
 		let isSelected: Bool
 		let isCurrent: Bool
 	}
 	
 	enum CellData {
-		case currentMonthDay(Day)
-		case otherMonthDay(Day)
+		case currentMonthDay(DayData)
+		case otherMonthDay(DayData)
 	}
 	
-	let calendarDays: [CellData]
+	struct ViewModel {
+		let dateString: String
+		let calendarViewSize: CGRect
+		let calendarDays: [CellData]
+	}
+	
+	let viewModel: ViewModel
 }
