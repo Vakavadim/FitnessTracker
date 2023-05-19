@@ -1,15 +1,15 @@
 //
-//  CalendarViewCell.swift
+//  CurrentMonthDayCell.swift
 //  FitnessTracker
 //
-//  Created by Вадим Гамзаев on 05.04.2023.
+//  Created by Вадим Гамзаев on 17.05.2023.
 //
 
 import UIKit
 import PinLayout
 
-class CalendarViewCell: UICollectionViewCell {
-	static let reuseIdentifier = "CalendarViewCell"
+class CurrentMonthDayCell: UICollectionViewCell {
+	static let reuseIdentifier = "CurrentMonthDayCell"
 
 	private lazy var titleLabel: UILabel = makeLabel()
 	private lazy var indicatorView: UIView = makeView()
@@ -18,29 +18,41 @@ class CalendarViewCell: UICollectionViewCell {
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 		setupView()
+		indicatorView.isHidden = true
 	}
 
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
 
-	private func setupView() {
-		contentView.addSubview(indicatorView)
-		contentView.addSubview(titleLabel)
-	}
-
 	override func layoutSubviews() {
 		super.layoutSubviews()
 		layout()
 	}
+	
+	// MARK: - Private methods
 
-	func configure(title: String) {
-		titleLabel.text = title
+	private func setupView() {
+		contentView.addSubview(indicatorView)
+		contentView.addSubview(titleLabel)
+	}
+	
+	// MARK: - Public methods
+
+	func configure(date: Date, selectedDate: Date) {
+		let dateFormator = DateFormatter()
+		dateFormator.dateFormat = "dd"
+		titleLabel.text = dateFormator.string(from: date)
+		if date == selectedDate {
+			indicatorView.isHidden = false
+		} else {
+			indicatorView.isHidden = true
+		}
 	}
 }
 
 // MARK: - Layout
-private extension CalendarViewCell {
+private extension CurrentMonthDayCell {
 	func layout() {
 		indicatorView
 			.pin

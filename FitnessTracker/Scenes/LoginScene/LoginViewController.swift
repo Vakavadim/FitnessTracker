@@ -13,8 +13,7 @@ class LoginViewController: UIViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		view.backgroundColor = .white
-		calendarView.backgroundColor = .gray
+		view.backgroundColor = .lightGray
 	}
 	
 	override func viewDidLayoutSubviews() {

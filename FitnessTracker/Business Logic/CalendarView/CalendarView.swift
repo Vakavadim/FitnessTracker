@@ -13,9 +13,13 @@ protocol CalendarViewDelegate: AnyObject {
 	func didSelectedDate() -> Date
 }
 
-protocol ICalendarView {
+protocol CalendarViewData {
 	func updateCollectionViewLayout()
 	func dateSelected() -> Date
+}
+
+protocol ICalendarView: AnyObject {
+	func render(viewData: CalendarViewModel)
 }
 
 class CalendarView: UIView {
@@ -26,20 +30,24 @@ class CalendarView: UIView {
 	private lazy var weekDays: UIStackView = makeWeekDaysStack()
 	private lazy var collectionView: UICollectionView = makeCollectionView()
 	private lazy var resizeButton: UIButton = makeButton()
-	
 	private var isWeekCalendar = false
 	let calendarManager: ICalendarManager
+	private var currentDate: Date {
+		didSet {
+			setSelectedDate(date: currentDate)
+		}
+	}
 	
-	private var mounthData = CalendarDataModel.Month(dates: [])
-	private var weekData = CalendarDataModel.Week(dates: [])
+	private var viewData = CalendarViewModel(calendarDays: [])
+	private var daysData: [CalendarDataModel] = []
 	
 	// MARK: - Lifecycle
 
-	init(calendarManager: ICalendarManager) {
+	init(calendarManager: ICalendarManager, selectedDate: Date = Date()) {
 		self.calendarManager = calendarManager
+		self.currentDate = calendarManager.makeDateWithDefaultTime(date: Date())
 		super.init(frame: .zero)
-		mounthData = calendarManager.getDatesForMonthCalendar(date: Date())
-		weekData = calendarManager.getDatesForWeekCalendar(date: Date())
+		setCalendarData()
 		setupView()
 		setBounds()
 	}
@@ -53,23 +61,35 @@ class CalendarView: UIView {
 		layout()
 	}
 	
+	// MARK: - Private methods
+	
 	/// Add Subviews and setup collectionView.
 	private func setupView() {
 		self.addSubview(dateLabel)
 		self.addSubview(weekDays)
 		self.addSubview(collectionView)
 		self.addSubview(resizeButton)
-		
+		self.backgroundColor = .white
 		collectionView.dataSource = self
 		collectionView.delegate = self
 		
 		collectionView.register(
-			CalendarViewCell.self,
-			forCellWithReuseIdentifier: CalendarViewCell.reuseIdentifier
+			OtherMonthDayCell.self,
+			forCellWithReuseIdentifier: OtherMonthDayCell.reuseIdentifier
+		)
+		
+		collectionView.register(
+			CurrentMonthDayCell.self,
+			forCellWithReuseIdentifier: CurrentMonthDayCell.reuseIdentifier
 		)
 	}
 	
-	// MARK: - Private methods
+	private func setCalendarData() {
+		daysData = isWeekCalendar
+		? calendarManager.getDatesForWeekCalendar(date: currentDate)
+		: calendarManager.getDatesForMonthCalendar(date: currentDate)
+		dateLabel.text = calendarManager.getMonthAndYearString(date: currentDate)
+	}
 	
 	/// Метод setBounds устанваливает значения Bounds для CalendarView в зависимости от значения isWeekCalendar.
 	private func setBounds() {
@@ -77,9 +97,20 @@ class CalendarView: UIView {
 		Sizes.CalendarView.weekViewSize : Sizes.CalendarView.mounthViewSize
 	}
 	
+	private func setSelectedDate(date: Date) {
+		let userDefaults = UserDefaults()
+		userDefaults.set(date, forKey: "selectedDate")
+	}
+	
+	private func unsetSelectedDate() {
+		let userDefaults = UserDefaults()
+		userDefaults.removeObject(forKey: "selectedDate")
+	}
+	
 	/// Метод changeCalendarSize меняет значение переменной isWeekCalendar,
 	@objc func changeCalendarSize() {
 		isWeekCalendar.toggle()
+		setCalendarData()
 		setBounds()
 		layout()
 		updateCollectionViewLayout()
@@ -104,21 +135,28 @@ class CalendarView: UIView {
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 extension CalendarView: UICollectionViewDelegate, UICollectionViewDataSource {
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		isWeekCalendar
-		? weekData.dates.count
-		: mounthData.dates.count
+		daysData.count
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCell(
-			withReuseIdentifier: CalendarViewCell.reuseIdentifier,
-			for: indexPath
-		)
-		guard let cell = cell as? CalendarViewCell else { return UICollectionViewCell() }
-//		let data = isWeekCalendar ? weekData : mounthData
-
-		cell.configure(title: "11")
-		return cell
+		switch daysData[indexPath.item] {
+		case .currentMonthDay(let date):
+			let cell = collectionView.dequeueReusableCell(
+				withReuseIdentifier: CurrentMonthDayCell.reuseIdentifier,
+				for: indexPath
+			)
+			guard let cell = cell as? CurrentMonthDayCell else { return UICollectionViewCell() }
+			cell.configure(date: date, selectedDate: self.currentDate)
+			return cell
+		case .otherMonthDay(let date):
+			let cell = collectionView.dequeueReusableCell(
+				withReuseIdentifier: OtherMonthDayCell.reuseIdentifier,
+				for: indexPath
+			)
+			guard let cell = cell as? OtherMonthDayCell else { return UICollectionViewCell() }
+			cell.configure(date: date, selectedDate: self.currentDate)
+			return cell
+		}
 	}
 }
 
@@ -154,6 +192,13 @@ extension CalendarView: UICollectionViewDelegateFlowLayout {
 	}
 }
 
+extension CalendarView: ICalendarView {
+	func render(viewData: CalendarViewModel) {
+		self.viewData = viewData
+		collectionView.reloadData()
+	}
+}
+
 // MARK: - Layout Subviews
 private extension CalendarView {
 	func layout() {
@@ -166,7 +211,7 @@ private extension CalendarView {
 		weekDays
 			.pin
 			.below(of: dateLabel)
-			.marginTop(Sizes.Padding.half)
+			.marginTop(Sizes.Padding.normal)
 			.left(Sizes.Padding.normal)
 			.right(Sizes.Padding.normal)
 		
@@ -277,8 +322,6 @@ class TestViewController: UIViewController {
 	
 	private func layout() {
 		view.addSubview(calendarView)
-		
-		calendarView.backgroundColor = .lightGray
 		calendarView.pin
 			.top()
 			.left()
