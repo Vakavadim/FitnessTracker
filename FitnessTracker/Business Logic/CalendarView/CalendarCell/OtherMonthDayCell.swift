@@ -8,20 +8,58 @@
 import UIKit
 import PinLayout
 
+class CalendarCell: UICollectionViewCell {
+	
+	// MARK: - Private properties
+
+	private lazy var titleLabel: UILabel = makeLabel()
+	private lazy var currentDayIndicatorView: UIView = makeView()
+	
+	// MARK: - Private methods
+	
+	private func makeLabel() -> UILabel {
+		let label = UILabel()
+		label.font = UIFont.systemFont(ofSize: 16)
+		label.textColor = .gray
+		label.textAlignment = .center
+		return label
+	}
+	
+	private func makeView() -> UIView {
+		let view = UIView()
+		view.backgroundColor = .red
+		
+		return view
+	}
+	
+	// MARK: - Public methods
+
+	func configure(dayData: CalendarModel.DayData) {
+		let dateFormator = DateFormatter()
+		dateFormator.dateFormat = "d"
+		titleLabel.text = dateFormator.string(from: dayData.date)
+		if dayData.isCurrent {
+			currentDayIndicatorView.isHidden = false
+		} else {
+			currentDayIndicatorView.isHidden = true
+		}
+	}
+}
+
 class OtherMonthDayCell: UICollectionViewCell {
 	static let reuseIdentifier = "OtherMonthDayCell"
 	
 	// MARK: - Private properties
 
 	private lazy var titleLabel: UILabel = makeLabel()
-	private lazy var indicatorView: UIView = makeView()
+	private lazy var currentDayIndicatorView: UIView = makeView()
 	
 	// MARK: - Lifecycle
 	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 		setupView()
-		indicatorView.isHidden = true
+		currentDayIndicatorView.isHidden = true
 	}
 
 	required init?(coder: NSCoder) {
@@ -36,7 +74,7 @@ class OtherMonthDayCell: UICollectionViewCell {
 	// MARK: - Private methods
 
 	private func setupView() {
-		contentView.addSubview(indicatorView)
+		contentView.addSubview(currentDayIndicatorView)
 		contentView.addSubview(titleLabel)
 	}
 	
@@ -47,9 +85,9 @@ class OtherMonthDayCell: UICollectionViewCell {
 		dateFormator.dateFormat = "d"
 		titleLabel.text = dateFormator.string(from: dayData.date)
 		if dayData.isCurrent {
-			indicatorView.isHidden = false
+			currentDayIndicatorView.isHidden = false
 		} else {
-			indicatorView.isHidden = true
+			currentDayIndicatorView.isHidden = true
 		}
 	}
 }
@@ -58,14 +96,14 @@ class OtherMonthDayCell: UICollectionViewCell {
 
 private extension OtherMonthDayCell {
 	func layout() {
-		indicatorView
+		currentDayIndicatorView
 			.pin
 			.top()
 			.left()
 			.right()
 			.bottom(10)
-		indicatorView.layer.cornerRadius = indicatorView.frame.width / 2
-		indicatorView.backgroundColor = .red
+		currentDayIndicatorView.layer.cornerRadius = currentDayIndicatorView.frame.width / 2
+		currentDayIndicatorView.backgroundColor = .red
 		
 		titleLabel
 			.pin
