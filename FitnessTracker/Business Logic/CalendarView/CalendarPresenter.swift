@@ -11,6 +11,8 @@ protocol ICalendarPresenter {
 	func viewIsReady()
 	func didSelectedDate(indexPath: IndexPath)
 	func didPressResizeButton()
+	func back()
+	func forward()
 }
 
 class CalendarPresenter: ICalendarPresenter {
@@ -19,6 +21,7 @@ class CalendarPresenter: ICalendarPresenter {
 	
 	private var isWeekCalendar = false
 	private var selectedDate: Date?
+	private var date: Date?
 	private let calendarManager: ICalendarManager
 	private unowned let view: ICalendarView
 	
@@ -27,40 +30,45 @@ class CalendarPresenter: ICalendarPresenter {
 	init(view: ICalendarView, calendarManager: ICalendarManager) {
 		self.view = view
 		self.calendarManager = calendarManager
+		self.date = calendarManager.makeDateWithDefaultTime(date: Date())
 	}
 	
 	// MARK: - Public methods
 	
 	func viewIsReady() {
-		view.render(viewData: mapViewData())
+		guard let date = self.date else {
+			fatalError("Date is not found")
+		}
+		view.render(viewData: mapViewData(date: date))
 	}
 	
 	func didSelectedDate(indexPath: IndexPath) {
 	}
 	
 	func didPressResizeButton() {
+		isWeekCalendar.toggle()
+		viewIsReady()
 	}
 	
 	// MARK: - Private methods
 	
-	private func mapViewData() -> CalendarModel.ViewModel {
-		let currentDate = calendarManager.makeDateWithDefaultTime(date: Date())
+	private func mapViewData(date: Date) -> CalendarModel.ViewModel {
 		let calendarSize = isWeekCalendar
 		? Sizes.CalendarView.weekViewSize
 		: Sizes.CalendarView.mounthViewSize
 		let viewModel = CalendarModel.ViewModel(
-			dateString: calendarManager.getMonthAndYearString(date: selectedDate ?? currentDate),
+			dateString: calendarManager.getMonthAndYearString(date: date),
 			calendarViewSize: calendarSize,
-			calendarDays: mapCellData()
+			calendarDays: mapCellData(date: date)
 		)
 		return viewModel
 	}
 	
-	private func mapCellData() -> [CalendarModel.CellData] {
+	private func mapCellData(date: Date) -> [CalendarModel.CellData] {
 		let currentDate = calendarManager.makeDateWithDefaultTime(date: Date())
 		let days = isWeekCalendar
-		? calendarManager.getDatesForWeekCalendar(date: selectedDate ?? currentDate)
-		: calendarManager.getDatesForMonthCalendar(date: selectedDate ?? currentDate)
+		? calendarManager.getDatesForWeekCalendar(date: date)
+		: calendarManager.getDatesForMonthCalendar(date: date)
 		
 		var data: [CalendarModel.CellData] = []
 		
@@ -86,5 +94,21 @@ class CalendarPresenter: ICalendarPresenter {
 		}
 		
 		return data
+	}
+	
+	func back() {
+		guard let date = self.date else {
+			fatalError("Date is not found")
+		}
+		self.date = calendarManager.back(date: date, isWeek: isWeekCalendar)
+		viewIsReady()
+	}
+	
+	func forward() {
+		guard let date = self.date else {
+			fatalError("Date is not found")
+		}
+		self.date = calendarManager.forward(date: date, isWeek: isWeekCalendar)
+		viewIsReady()
 	}
 }

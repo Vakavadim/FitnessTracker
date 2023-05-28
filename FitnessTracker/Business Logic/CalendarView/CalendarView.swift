@@ -28,8 +28,11 @@ class CalendarView: UIView {
 	
 	private lazy var dateLabel: UILabel = makeLabel()
 	private lazy var weekDays: UIStackView = makeWeekDaysStack()
-	private lazy var collectionView: UICollectionView = makeCollectionView()
+	private lazy var leftCollectionView: UICollectionView = makeCollectionView()
+	private lazy var centerCollectionView: UICollectionView = makeCollectionView()
+	private lazy var rightCollectionView: UICollectionView = makeCollectionView()
 	private lazy var resizeButton: UIButton = makeButton()
+	private lazy var scrollView: UIScrollView = makeScrollView()
 	
 	private var presenter: ICalendarPresenter! // swiftlint:disable:this implicitly_unwrapped_optional
 	private var viewData = CalendarModel.ViewModel(
@@ -46,6 +49,7 @@ class CalendarView: UIView {
 		presenter.viewIsReady()
 		setupView()
 		setBounds()
+		setupScrollView()
 		self.dateLabel.text = viewData.dateString
 	}
 	
@@ -56,6 +60,7 @@ class CalendarView: UIView {
 	override func layoutSubviews() {
 		super.layoutSubviews()
 		layout()
+		setupScrollView()
 	}
 	
 	// MARK: - Private methods
@@ -69,22 +74,26 @@ class CalendarView: UIView {
 	private func setupView() {
 		self.addSubview(dateLabel)
 		self.addSubview(weekDays)
-		self.addSubview(collectionView)
+		self.addSubview(scrollView)
 		self.addSubview(resizeButton)
 		self.backgroundColor = .white
 		
-		collectionView.dataSource = self
-		collectionView.delegate = self
-		
-		collectionView.register(
-			OtherMonthDayCell.self,
-			forCellWithReuseIdentifier: OtherMonthDayCell.reuseIdentifier
-		)
-		
-		collectionView.register(
-			CurrentMonthDayCell.self,
-			forCellWithReuseIdentifier: CurrentMonthDayCell.reuseIdentifier
-		)
+		setupCollectionViews([leftCollectionView, centerCollectionView, rightCollectionView])
+	}
+	
+	private func setupCollectionViews(_ collectionViews: [UICollectionView]) {
+		for view in collectionViews {
+			view.dataSource = self
+			view.delegate = self
+			view.register(
+				CurrentMonthDayCell.self,
+				forCellWithReuseIdentifier: CurrentMonthDayCell.reuseIdentifier
+			)
+			view.register(
+				OtherMonthDayCell.self,
+				forCellWithReuseIdentifier: OtherMonthDayCell.reuseIdentifier
+			)
+		}
 	}
 	
 	/// Метод setBounds устанваливает значения Bounds для CalendarView в зависимости от значения isWeekCalendar.
@@ -92,26 +101,66 @@ class CalendarView: UIView {
 		self.bounds = viewData.calendarViewSize
 	}
 	
-	/// Метод changeCalendarSize меняет значение переменной isWeekCalendar,
-	@objc func changeCalendarSize() {
-		setBounds()
-		layout()
-		updateCollectionViewLayout()
+	/// Метод updateCollectionViewLayout обнавляет данные Calendar CollectionView
+	/// и должен быть вызван в методе viewDidLayoutSubviews() родительского ViewController.
+	func updateCollectionViewLayout() {
+		self.centerCollectionView.reloadData()
+		self.centerCollectionView.layoutIfNeeded()
 	}
 	
-	/// Метод updateCollectionViewLayout обнавляет данные Calendar CollectionView
-	///  и должен быть вызван в методе viewDidLayoutSubviews() родительского ViewController.
-	func updateCollectionViewLayout() {
-		collectionView.reloadData()
-		collectionView.layoutIfNeeded()
-		collectionView
+	private func setupScrollView() {
+		scrollView
 			.pin
-			.left(Sizes.Padding.normal)
-			.right(Sizes.Padding.normal)
+			.left()
+			.right()
 			.marginTop(Sizes.Padding.normal)
 			.below(of: weekDays)
 			.marginBottom(Sizes.Padding.minimal)
-			.height(collectionView.contentSize.height)
+			.height(centerCollectionView.contentSize.height)
+		
+		let calendarViews: [UIView] = [
+			self.leftCollectionView,
+			self.centerCollectionView,
+			self.rightCollectionView
+		]
+		
+		for view in calendarViews {
+			scrollView.addSubview(view)
+		}
+		
+		self.scrollView.decelerationRate = .fast
+		self.scrollView.showsHorizontalScrollIndicator = false
+		self.scrollView.delegate = self
+		self.scrollView.contentInset = UIEdgeInsets(
+			top: 0.0,
+			left: 16.0,
+			bottom: 0.0,
+			right: 32.0
+		)
+
+		let spaceBetweenItems: CGFloat = 8.0
+		let horizontalItemOffsetFromSuperView: CGFloat = 16.0
+		let itemWidth = self.scrollView.frame.width - horizontalItemOffsetFromSuperView * 2
+		let itemHeight = self.scrollView.frame.height
+		
+		var startX = CGFloat.zero
+		calendarViews.forEach { view in
+			view.frame.origin = CGPoint(x: startX, y: CGFloat.zero)
+			view.frame.size = CGSize(width: itemWidth, height: itemHeight)
+			startX += view.frame.width + spaceBetweenItems
+		}
+		self.scrollView.contentSize = CGSize(
+			width: itemWidth * CGFloat(calendarViews.count),
+			height: centerCollectionView.contentSize.height
+		)
+	}
+	
+	// MARK: - Actions
+	
+	/// Метод changeCalendarSize меняет значение переменной isWeekCalendar,
+	@objc func changeCalendarSize() {
+		presenter.didPressResizeButton()
+		setBounds()
 	}
 }
 
@@ -167,7 +216,9 @@ extension CalendarView: UICollectionViewDelegateFlowLayout {
 extension CalendarView: ICalendarView {
 	func render(viewData: CalendarModel.ViewModel) {
 		self.viewData = viewData
-		collectionView.reloadData()
+		leftCollectionView.reloadData()
+		centerCollectionView.reloadData()
+		rightCollectionView.reloadData()
 	}
 }
 
@@ -193,88 +244,53 @@ private extension CalendarView {
 			.bottom(Sizes.Padding.minimal)
 			.sizeToFit()
 	}
-	
-	// MARK: - Make Views methods
-	
-	func makeLabel() -> UILabel {
-		let label = UILabel()
-		label.text = "Октябрь 2023"
-		label.font = UIFont.preferredFont(forTextStyle: .body)
-		label.textColor = .black
-		
-		label.translatesAutoresizingMaskIntoConstraints = false
-		return label
-	}
-	
-	func makeDayLabel(day: String) -> UILabel {
-		let dayLabel = UILabel()
-		dayLabel.text = day
-		dayLabel.font = UIFont.preferredFont(forTextStyle: .caption2)
-		dayLabel.textColor = .black
-		dayLabel.textAlignment = .center
-		
-		dayLabel.translatesAutoresizingMaskIntoConstraints = false
-		
-		NSLayoutConstraint.activate(
-		 [
-			dayLabel.widthAnchor.constraint(equalToConstant: Sizes.S.width)
-		 ]
-		)
+}
 
-		return dayLabel
-	}
-	
-	func makeDayLabels(from weekDays: String) -> [UILabel] {
-		var labels: [UILabel] = []
-		let days = weekDays.components(separatedBy: " ")
-		for day in days {
-			let label = makeDayLabel(day: day)
-			labels.append(label)
+// MARK: - UIScrollViewDelegate
+
+extension CalendarView: UIScrollViewDelegate {
+	func scrollViewWillEndDragging(
+		_ scrollView: UIScrollView,
+		withVelocity velocity: CGPoint,
+		targetContentOffset: UnsafeMutablePointer<CGPoint>
+	) {
+		let gap: CGFloat = self.centerCollectionView.frame.width / 3
+		let targetRightOffsetX = targetContentOffset.pointee.x + self.frame.width
+		
+		if (self.rightCollectionView.frame.minX + gap) < targetRightOffsetX {
+			targetContentOffset.pointee.x = self.rightCollectionView.frame.midX - self.frame.midX
+		} else if (self.leftCollectionView.frame.maxX - gap) > targetContentOffset.pointee.x {
+			targetContentOffset.pointee.x = self.leftCollectionView.frame.midX - self.frame.midX
+		} else {
+			targetContentOffset.pointee.x = self.centerCollectionView.frame.midX - self.frame.midX
 		}
-		return labels
 	}
 	
-	func makeWeekDaysStack() -> UIStackView {
-		let stackView = UIStackView()
-		let days = makeDayLabels(from: L10n.CalendarView.weekDays)
-		let screenwWidth = UIScreen.main.bounds.width
-		let elementWidth = Sizes.S.width
-		let columnCount: CGFloat = Sizes.CalendarView.numberOfColumns
-		let insertsCount: CGFloat = Sizes.CalendarView.numberOfInsections
-
-		stackView.axis = .horizontal
-		stackView.alignment = .fill
-		stackView.distribution = .fillEqually
-		stackView.spacing = (screenwWidth - (elementWidth * columnCount) - Sizes.Padding.double) / insertsCount
-		stackView.autoresizesSubviews = true
-		stackView.contentMode = .scaleAspectFill
-
-		for day in days {
-			stackView.addArrangedSubview(day)
+	func scrollViewDidScroll(_ scrollView: UIScrollView) {
+		guard
+				self.leftCollectionView.frame.width > 0,
+				self.centerCollectionView.frame.width > 0,
+				self.rightCollectionView.frame.width > 0
+				else {
+			return
 		}
-		stackView.translatesAutoresizingMaskIntoConstraints = false
 
-		return stackView
-	}
-	
-	func makeCollectionView() -> UICollectionView {
-		let layout = UICollectionViewFlowLayout()
-		layout.scrollDirection = .vertical
-		
-		let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-		collectionView.isScrollEnabled = false
+		let gap: CGFloat = self.centerCollectionView.frame.width / 3
+		let spacing: CGFloat = 8.0
 
-		collectionView.translatesAutoresizingMaskIntoConstraints = false
+		let currentRightOffset: CGFloat = scrollView.contentOffset.x + self.frame.width + scrollView.contentInset.left
 
-		return collectionView
-	}
-	
-	func makeButton() -> UIButton {
-		let button = UIButton()
-		button.setImage(UIImage(asset: Asset.homeIndicator), for: .normal)
-		button.addTarget(self, action: #selector(changeCalendarSize), for: .touchUpInside)
-		button.translatesAutoresizingMaskIntoConstraints = false
-		return button
+		if (self.rightCollectionView.frame.maxX - gap) < currentRightOffset {
+			scrollView.contentOffset.x -= self.centerCollectionView.frame.width + spacing
+			presenter.forward()
+			self.dateLabel.text = viewData.dateString
+			centerCollectionView.reloadData()
+		} else if (self.leftCollectionView.frame.minX + gap) > scrollView.contentOffset.x {
+			scrollView.contentOffset.x += self.centerCollectionView.frame.width + spacing
+			presenter.back()
+			self.dateLabel.text = viewData.dateString
+			centerCollectionView.reloadData()
+		}
 	}
 }
 
@@ -298,7 +314,7 @@ class TestViewController: UIViewController {
 			.top()
 			.left()
 			.right()
-		calendarView.updateCollectionViewLayout()
+//		calendarView.updateCollectionViewLayout()
 	}
 }
 

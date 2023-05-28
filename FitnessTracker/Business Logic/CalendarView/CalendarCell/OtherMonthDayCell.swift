@@ -8,44 +8,6 @@
 import UIKit
 import PinLayout
 
-class CalendarCell: UICollectionViewCell {
-	
-	// MARK: - Private properties
-
-	private lazy var titleLabel: UILabel = makeLabel()
-	private lazy var currentDayIndicatorView: UIView = makeView()
-	
-	// MARK: - Private methods
-	
-	private func makeLabel() -> UILabel {
-		let label = UILabel()
-		label.font = UIFont.systemFont(ofSize: 16)
-		label.textColor = .gray
-		label.textAlignment = .center
-		return label
-	}
-	
-	private func makeView() -> UIView {
-		let view = UIView()
-		view.backgroundColor = .red
-		
-		return view
-	}
-	
-	// MARK: - Public methods
-
-	func configure(dayData: CalendarModel.DayData) {
-		let dateFormator = DateFormatter()
-		dateFormator.dateFormat = "d"
-		titleLabel.text = dateFormator.string(from: dayData.date)
-		if dayData.isCurrent {
-			currentDayIndicatorView.isHidden = false
-		} else {
-			currentDayIndicatorView.isHidden = true
-		}
-	}
-}
-
 class OtherMonthDayCell: UICollectionViewCell {
 	static let reuseIdentifier = "OtherMonthDayCell"
 	
@@ -125,8 +87,6 @@ private extension OtherMonthDayCell {
 	
 	func makeView() -> UIView {
 		let view = UIView()
-		view.backgroundColor = .red
-		
 		return view
 	}
 }
