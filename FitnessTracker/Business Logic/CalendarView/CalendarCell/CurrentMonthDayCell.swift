@@ -12,13 +12,14 @@ class CurrentMonthDayCell: UICollectionViewCell {
 	static let reuseIdentifier = "CurrentMonthDayCell"
 
 	private lazy var titleLabel: UILabel = makeLabel()
-	private lazy var indicatorView: UIView = makeView()
+	private lazy var currentDayIndicatorView: UIView = makeView()
+	private lazy var selectedDayIndicatorView: UIView = makeView()
 	
 	 // MARK: - Initializers
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 		setupView()
-		indicatorView.isHidden = true
+		currentDayIndicatorView.isHidden = true
 	}
 
 	required init?(coder: NSCoder) {
@@ -33,7 +34,8 @@ class CurrentMonthDayCell: UICollectionViewCell {
 	// MARK: - Private methods
 
 	private func setupView() {
-		contentView.addSubview(indicatorView)
+		contentView.addSubview(currentDayIndicatorView)
+		contentView.addSubview(selectedDayIndicatorView)
 		contentView.addSubview(titleLabel)
 	}
 	
@@ -44,9 +46,15 @@ class CurrentMonthDayCell: UICollectionViewCell {
 		dateFormator.dateFormat = "d"
 		titleLabel.text = dateFormator.string(from: dayData.date)
 		if dayData.isCurrent {
-			indicatorView.isHidden = false
+			currentDayIndicatorView.isHidden = false
 		} else {
-			indicatorView.isHidden = true
+			currentDayIndicatorView.isHidden = true
+		}
+		
+		if dayData.isSelected {
+			selectedDayIndicatorView.isHidden = false
+		} else {
+			selectedDayIndicatorView.isHidden = true
 		}
 	}
 }
@@ -54,14 +62,23 @@ class CurrentMonthDayCell: UICollectionViewCell {
 // MARK: - Layout
 private extension CurrentMonthDayCell {
 	func layout() {
-		indicatorView
+		currentDayIndicatorView
 			.pin
 			.top()
 			.left()
 			.right()
 			.bottom(10)
-		indicatorView.layer.cornerRadius = indicatorView.frame.width / 2
-		indicatorView.backgroundColor = .red
+		currentDayIndicatorView.layer.cornerRadius = currentDayIndicatorView.frame.width / 2
+		currentDayIndicatorView.backgroundColor = .red
+		
+		selectedDayIndicatorView
+			.pin
+			.top()
+			.left()
+			.right()
+			.bottom(10)
+		currentDayIndicatorView.layer.cornerRadius = currentDayIndicatorView.frame.width / 2
+		currentDayIndicatorView.backgroundColor = .lightGray
 		
 		titleLabel
 			.pin

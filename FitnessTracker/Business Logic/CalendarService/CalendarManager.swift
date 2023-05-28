@@ -12,6 +12,8 @@ protocol ICalendarManager {
 	func getDatesForWeekCalendar(date: Date) -> [CalendarDataModel]
 	func getDatesForMonthCalendar(date: Date) -> [CalendarDataModel]
 	func getMonthAndYearString(date: Date) -> String
+	func back(date: Date, isWeek: Bool) -> Date
+	func forward(date: Date, isWeek: Bool) -> Date
 }
 
 final class CalendarManager: ICalendarManager {
@@ -221,6 +223,18 @@ final class CalendarManager: ICalendarManager {
 		let nextMonthDates = getDatesOfNextMonthCalendar(date: date).map { CalendarDataModel.otherMonthDay($0) }
 		
 		return previusMonthDates + currentMonthDates + nextMonthDates
+	}
+	
+	func back(date: Date, isWeek: Bool) -> Date {
+		isWeek
+		? addDay(date: date, days: -7)
+		: addMonth(date: date, month: -1)
+	}
+	
+	func forward(date: Date, isWeek: Bool) -> Date {
+		isWeek
+		? addDay(date: date, days: +7)
+		: addMonth(date: date, month: +1)
 	}
 }
 
