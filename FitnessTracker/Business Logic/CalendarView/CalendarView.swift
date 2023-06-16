@@ -10,7 +10,7 @@ import PinLayout
 import SwiftUI
 
 protocol CalendarViewDelegate: AnyObject {
-	func didSelectedDate() -> Date
+	func didSelectedDate(date: Date)
 }
 
 protocol CalendarViewData {
@@ -24,19 +24,23 @@ protocol ICalendarView: AnyObject {
 
 class CalendarView: UIView {
 	
+	// MARK: - Dependencies
+
+	weak var delegate: CalendarViewDelegate?
+	
 	// MARK: - Private properties
 	
 	private lazy var dateLabel: UILabel = makeLabel()
 	private lazy var weekDays: UIStackView = makeWeekDaysStack()
 	private lazy var leftCollectionView: UICollectionView = makeCollectionView()
-	private lazy var centerCollectionView: UICollectionView = makeCollectionView()
+	private lazy var centerCollectionView: CurrentMonthCollectionView = makeCurrentMonthCollectionView()
 	private lazy var rightCollectionView: UICollectionView = makeCollectionView()
 	private lazy var resizeButton: UIButton = makeButton()
 	private lazy var scrollView: UIScrollView = makeScrollView()
 	
 	private var presenter: ICalendarPresenter! // swiftlint:disable:this implicitly_unwrapped_optional
 	private var viewData = CalendarModel.ViewModel(
-			dateString: " ",
+			dateString: "",
 			calendarViewSize: CGRect(),
 			calendarDays: []
 	)
@@ -153,6 +157,11 @@ class CalendarView: UIView {
 			width: itemWidth * CGFloat(calendarViews.count),
 			height: centerCollectionView.contentSize.height
 		)
+		
+		scrollView.setContentOffset(
+			CGPoint(x: centerCollectionView.frame.midX - scrollView.bounds.width / 2, y: 0),
+			animated: false
+		)
 	}
 	
 	// MARK: - Actions
@@ -177,6 +186,12 @@ extension CalendarView: UICollectionViewDelegate, UICollectionViewDataSource {
 			model: self.viewData.calendarDays[indexPath.item]
 		)
 		return cell
+	}
+	
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		let date = self.presenter.didSelectedDate(indexPath: indexPath)
+		self.dateLabel.text = viewData.dateString
+		self.delegate?.didSelectedDate(date: date)
 	}
 }
 
@@ -314,7 +329,6 @@ class TestViewController: UIViewController {
 			.top()
 			.left()
 			.right()
-//		calendarView.updateCollectionViewLayout()
 	}
 }
 

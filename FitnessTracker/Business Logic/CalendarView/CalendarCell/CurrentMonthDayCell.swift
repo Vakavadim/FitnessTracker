@@ -77,8 +77,8 @@ private extension CurrentMonthDayCell {
 			.left()
 			.right()
 			.bottom(10)
-		currentDayIndicatorView.layer.cornerRadius = currentDayIndicatorView.frame.width / 2
-		currentDayIndicatorView.backgroundColor = .lightGray
+		selectedDayIndicatorView.layer.cornerRadius = selectedDayIndicatorView.frame.width / 2
+		selectedDayIndicatorView.backgroundColor = .lightGray
 		
 		titleLabel
 			.pin

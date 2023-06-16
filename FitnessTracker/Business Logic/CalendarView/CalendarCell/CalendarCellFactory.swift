@@ -7,17 +7,26 @@
 
 import UIKit
 
-class CalendarCellFactory { // swiftlint:disable:this convenience_type
+final class CalendarCellFactory { // swiftlint:disable:this convenience_type
 	static func cellForCollectionView(
 		_ collectionView: UICollectionView,
 		indexPath: IndexPath,
 		model: CalendarModel.CellData
 	) -> UICollectionViewCell {
-		switch model {
-		case .currentMonthDay(let dayData):
-			return cellForCurrentMonthDay(collectionView, indexPath: indexPath, dayData: dayData)
-		case .otherMonthDay(let dayData):
-			return cellForOtherMonthDay(collectionView, indexPath: indexPath, dayData: dayData)
+		if collectionView == collectionView as? CurrentMonthCollectionView {
+			switch model {
+			case .currentMonthDay(let dayData):
+				return cellForCurrentMonthDay(collectionView, indexPath: indexPath, dayData: dayData)
+			case .otherMonthDay(let dayData):
+				return cellForOtherMonthDay(collectionView, indexPath: indexPath, dayData: dayData)
+			}
+		} else {
+			switch model {
+			case .currentMonthDay(let dayData):
+				return cellForOtherMonthDay(collectionView, indexPath: indexPath, dayData: dayData)
+			case .otherMonthDay(let dayData):
+				return cellForOtherMonthDay(collectionView, indexPath: indexPath, dayData: dayData)
+			}
 		}
 	}
 

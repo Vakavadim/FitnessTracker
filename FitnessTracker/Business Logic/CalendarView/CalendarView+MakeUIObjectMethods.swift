@@ -89,6 +89,18 @@ extension CalendarView {
 		return collectionView
 	}
 	
+	func makeCurrentMonthCollectionView() -> CurrentMonthCollectionView {
+		let layout = UICollectionViewFlowLayout()
+		layout.scrollDirection = .vertical
+		
+		let collectionView = CurrentMonthCollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+		collectionView.isScrollEnabled = false
+
+		collectionView.translatesAutoresizingMaskIntoConstraints = false
+
+		return collectionView
+	}
+	
 	func makeButton() -> UIButton {
 		let button = UIButton()
 		button.setImage(UIImage(asset: Asset.homeIndicator), for: .normal)
