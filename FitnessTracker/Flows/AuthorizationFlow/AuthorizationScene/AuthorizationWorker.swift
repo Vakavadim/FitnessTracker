@@ -1,6 +1,6 @@
 //
 //  AuthorizationViewController.swift
-//  MdEditor
+//  FitnessTracker
 //
 //  Created by Вадим Гамзаев on 10.06.2023.
 //
@@ -24,11 +24,11 @@ class AuthorizationWorker: IAuthorizationWorker {
 
 	// MARK: - Dependencies
 
-	let authManager: IOAuthManager
+	let authManager: IAuthManager
 
 	// MARK: - Lifecycle
 
-	init(authManager: IOAuthManager) {
+	init(authManager: IAuthManager) {
 		self.authManager = authManager
 	}
 
@@ -39,13 +39,6 @@ class AuthorizationWorker: IAuthorizationWorker {
 		password: Password,
 		completion: @escaping (AuthorizationResult) -> Void
 	) {
-		authManager.login(login: login, password: password) { result in
-				switch result {
-				case .success(let token):
-					completion(.success(token))
-				case .failure(let error):
-					completion(.failure(error))
-				}
-			}
+		authManager.login(login: login, password: password)
 	}
 }

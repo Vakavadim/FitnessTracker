@@ -8,7 +8,7 @@
 import Foundation
 
 /// Пароль пользователя.
-public struct Password: MaskStringConvertible {
+struct Password: MaskStringConvertible {
 	/// Значение пароля.
 	let rawValue: String
 

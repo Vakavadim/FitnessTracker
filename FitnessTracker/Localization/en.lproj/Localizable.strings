@@ -9,3 +9,17 @@
 "title" = "TestTitle";
 "secondTitle" = "Second test";
 "CalendarView.WeekDays" = "S M T W T F S";
+
+"Authorization.authorization" = "Sign in";
+"Authorization.placeholder.email" = "Email";
+"Authorization.placeholder.password" = "Password";
+"Authorization.registration" = "Create account";
+"Authorization.passwordRecovery" = "Forgot password?";
+"Authorization.googleSignUp" = "Sign in with Google";
+"Authorization.facebookSignUp" = "Sign in with Facebook";
+"Authorization.title" = "Authorization";
+"Authorization.alertTitle" = "Authorization Error";
+"Authorization.wrongCredentials" = "Wrong login or password";
+
+"Extensions.UIViewController.CustomAlert.CancelButton" = "Cancel";
+"Extensions.UIViewController.SimpleAlert.ButtonTitle" = "OK";

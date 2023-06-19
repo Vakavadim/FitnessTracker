@@ -1,6 +1,6 @@
 //
 //  AuthorizationViewController.swift
-//  MdEditor
+//  FitnessTracker
 //
 //  Created by Вадим Гамзаев on 10.06.2023.
 //

@@ -1,6 +1,6 @@
 //
 //  AuthorizationViewController.swift
-//  MdEditor
+//  FitnessTracker
 //
 //  Created by Вадим Гамзаев on 10.06.2023.
 //
@@ -24,8 +24,8 @@ class AuthorizationViewController: UIViewController {
 
 	// MARK: - Private properties
 
-	private lazy var textFieldLogin: UITextField = makeTextField()
-	private lazy var textFieldPass: UITextField = makeTextField()
+	private lazy var textFieldLogin: UITextField = makeLoginTextField()
+	private lazy var textFieldPass: UITextField = makePasswordTextField()
 	private lazy var buttonLogin: UIButton = makeButtonLogin()
 	private var loginText: String {
 		get {
@@ -97,16 +97,16 @@ extension AuthorizationViewController {
 			.pin
 			.top(Sizes.topOffset)
 			.hCenter()
-			.width(Sizes.M.maxWidth)
-			.height(Sizes.M.height)
+			.width(Sizes.L.width)
+			.height(Sizes.S.height)
 
 		textFieldPass
 			.pin
 			.hCenter()
 			.below(of: textFieldLogin)
 			.margin(Sizes.Padding.normal)
-			.width(Sizes.M.maxWidth)
-			.height(Sizes.M.height)
+			.width(Sizes.L.width)
+			.height(Sizes.S.height)
 
 		buttonLogin
 			.pin
@@ -114,10 +114,10 @@ extension AuthorizationViewController {
 			.below(of: textFieldPass)
 			.margin(Sizes.Padding.double)
 			.width(Sizes.L.width)
-			.height(Sizes.L.height)
+			.height(Sizes.S.height)
 	}
 
-	private func makeTextField() -> UITextField {
+	private func makeLoginTextField() -> UITextField {
 		let textField = UITextField()
 
 		textField.backgroundColor = .white
@@ -125,8 +125,39 @@ extension AuthorizationViewController {
 		textField.layer.borderWidth = Sizes.borderWidth
 		textField.layer.cornerRadius = Sizes.cornerRadius
 		textField.layer.borderColor = UIColor.lightGray.cgColor
-		textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: Sizes.Padding.half, height: textField.frame.height))
+		textField.leftView = UIView(
+			frame: CGRect(
+				x: 0,
+				y: 0,
+				width: Sizes.Padding.normal,
+				height: textField.frame.height
+			)
+		)
 		textField.leftViewMode = .always
+		textField.placeholder = L10n.Authorization.Placeholder.email
+		textField.translatesAutoresizingMaskIntoConstraints = false
+
+		return textField
+	}
+	
+	private func makePasswordTextField() -> UITextField {
+		let textField = UITextField()
+
+		textField.backgroundColor = .white
+		textField.textColor = .black
+		textField.layer.borderWidth = Sizes.borderWidth
+		textField.layer.cornerRadius = Sizes.cornerRadius
+		textField.layer.borderColor = UIColor.lightGray.cgColor
+		textField.leftView = UIView(
+			frame: CGRect(
+				x: 0,
+				y: 0,
+				width: Sizes.Padding.normal,
+				height: textField.frame.height
+			)
+		)
+		textField.leftViewMode = .always
+		textField.placeholder = L10n.Authorization.Placeholder.password
 		textField.translatesAutoresizingMaskIntoConstraints = false
 
 		return textField
@@ -145,3 +176,13 @@ extension AuthorizationViewController {
 		return button
 	}
 }
+
+#if DEBUG
+struct Provider: PreviewProvider {
+	static var previews: some View {
+		Group {
+			AuthorizationViewController().preview()
+		}
+	}
+}
+#endif

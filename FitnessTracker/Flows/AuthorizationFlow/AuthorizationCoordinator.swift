@@ -1,6 +1,6 @@
 //
 //  AuthorizationCoordinator.swift
-//  MdEditor
+//  FitnessTracker
 //
 //  Created by Вадим Гамзаев on 10.06.2023.
 //
@@ -38,7 +38,7 @@ class AuthorizationCoordinator: IAuthorizationCoordinator {
 	func start(_ flow: Flow? = nil) {
 		showAuthorizationFlow()
 	}
-
+	
 	/// Стартует сценарий сцены авторизации.
 	func showAuthorizationFlow() {
 		let authorizationViewController = AuthorizationAssembler.assembly(coordinator: self)

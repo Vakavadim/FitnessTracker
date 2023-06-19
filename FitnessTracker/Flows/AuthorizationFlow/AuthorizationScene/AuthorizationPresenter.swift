@@ -1,6 +1,6 @@
 //
 //  AuthorizationViewController.swift
-//  MdEditor
+//  FitnessTracker
 //
 //  Created by Вадим Гамзаев on 10.06.2023.
 //
@@ -24,7 +24,7 @@ class AuthorizationPresenter: IAuthorizationPresenter {
 	// MARK: - Internal Methods
 
 	func present(responce: AuthorizationModel.Response) {
-		let viewModel = AuthorizationModel.ViewModel.init(
+		let viewModel = AuthorizationModel.ViewModel(
 			errorMessage: (handleError(error: responce.error))
 		)
 		viewController?.render(viewModel: viewModel)

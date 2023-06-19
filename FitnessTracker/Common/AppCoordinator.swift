@@ -17,7 +17,6 @@ protocol IAppCoordinator: ICoordinator {
 
 /// Координатор приложения
 final class AppCoordinator: IAppCoordinator {
-
 	// MARK: - Dependencies
 
 	var navigationController: UINavigationController
@@ -38,6 +37,8 @@ final class AppCoordinator: IAppCoordinator {
 
 	func start(_ flow: Flow? = nil) {
 		switch flow {
+		case .onboarding:
+			showOnboarding()
 		case .authorization:
 			showAuthorizationFlow()
 		case .main:
@@ -46,12 +47,31 @@ final class AppCoordinator: IAppCoordinator {
 			showAuthorizationFlow()
 		}
 	}
+		
+	/// Метод для старта сценария главного экрана
+	func showOnboarding() {
+	}
 
 	/// Метод для старта сценария авторизации
 	func showAuthorizationFlow() {
+		let authorizationCoordinator = AuthorizationCoordinator(navigationController: navigationController)
+		authorizationCoordinator.finishDelegate = self
+		childCoordinators.append(authorizationCoordinator)
+		authorizationCoordinator.start()
 	}
 
 	/// Метод для старта сценария главного экрана
 	func showMainFlow() {
+	}
+}
+
+// MARK: - ICoordinatorFinishDelegate
+
+extension AppCoordinator: ICoordinatorFinishDelegate {
+	func didFinish(_ coordinator: ICoordinator) {
+		if coordinator is IAuthorizationCoordinator {
+			childCoordinators.removeAll { $0 === coordinator }
+			showMainFlow()
+		}
 	}
 }

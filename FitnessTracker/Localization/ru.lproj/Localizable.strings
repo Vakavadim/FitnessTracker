@@ -9,3 +9,17 @@
 "title" = "Тестовый текст";
 "secondTitle" = "Второй тест";
 "CalendarView.WeekDays" = "В П В С Ч П С";
+
+"Authorization.authorization" = "Войти";
+"Authorization.placeholder.email" = "Почта";
+"Authorization.placeholder.password" = "Пароль";
+"Authorization.registration" = "Создать аккаунт";
+"Authorization.passwordRecovery" = "Забыли пароль?";
+"Authorization.googleSignUp" = "Войти с аккаунтом Google";
+"Authorization.facebookSignUp" = "Войти с аккаунтом Facebook";
+"Authorization.title" = "Авторизация";
+"Authorization.alertTitle" = "Ошибка авторизации";
+"Authorization.wrongCredentials" = "Неверный логин или пароль";
+
+"Extensions.UIViewController.CustomAlert.CancelButton" = "Отмена";
+"Extensions.UIViewController.SimpleAlert.ButtonTitle" = "ОК";
