@@ -16,23 +16,32 @@ internal enum L10n {
     /// Sign in
     internal static let authorization = L10n.tr("Localizable", "Authorization.authorization")
     /// Sign in with Facebook
-    internal static let facebookSignUp = L10n.tr("Localizable", "Authorization.facebookSignUp")
+    internal static let facebookSignIn = L10n.tr("Localizable", "Authorization.facebookSignIn")
     /// Sign in with Google
-    internal static let googleSignUp = L10n.tr("Localizable", "Authorization.googleSignUp")
+    internal static let googleSignIn = L10n.tr("Localizable", "Authorization.googleSignIn")
+    /// or
+    internal static let orLabel = L10n.tr("Localizable", "Authorization.orLabel")
     /// Forgot password?
     internal static let passwordRecovery = L10n.tr("Localizable", "Authorization.passwordRecovery")
     /// Create account
     internal static let registration = L10n.tr("Localizable", "Authorization.registration")
     /// Authorization
     internal static let title = L10n.tr("Localizable", "Authorization.title")
-    /// Wrong login or password
-    internal static let wrongCredentials = L10n.tr("Localizable", "Authorization.wrongCredentials")
+
+    internal enum Error {
+      /// Wrong login or password
+      internal static let wrongCredentials = L10n.tr("Localizable", "Authorization.error.wrongCredentials")
+    }
 
     internal enum Placeholder {
       /// Email
       internal static let email = L10n.tr("Localizable", "Authorization.placeholder.email")
+      /// Name
+      internal static let name = L10n.tr("Localizable", "Authorization.placeholder.name")
       /// Password
       internal static let password = L10n.tr("Localizable", "Authorization.placeholder.password")
+      /// Repeat password
+      internal static let passwordRepeat = L10n.tr("Localizable", "Authorization.placeholder.passwordRepeat")
     }
   }
 

@@ -8,7 +8,13 @@
 import Foundation
 
 enum AuthorizationModel {
-	struct Request {
+
+	enum Request {
+		case login(LoginData)
+		case signUp
+	}
+
+	struct LoginData {
 		var login: Login
 		var password: Password
 	}

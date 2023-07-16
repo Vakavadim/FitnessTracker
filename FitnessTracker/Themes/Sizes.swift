@@ -39,6 +39,18 @@ enum Sizes {
 		}
 	}
 	
+	enum Icon {
+		enum S { // swiftlint:disable:this type_name
+			static let size: CGFloat = 40
+		}
+	}
+	
+	enum Spacer {
+		static let lineWidth: Percent = 38%
+		static let spacerHeight: CGFloat = 40
+		static let borderWidth: CGFloat = 0.5
+	}
+	
 	enum Padding {
 		static let minimal: CGFloat = 4
 		static let half: CGFloat = 8

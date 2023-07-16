@@ -16,7 +16,7 @@ protocol IAuthorizationWorker {
 }
 
 enum AuthorizationResult {
-	case success(AuthToken)
+	case success
 	case failure(Error)
 }
 

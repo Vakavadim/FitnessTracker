@@ -11,7 +11,7 @@ import Foundation
 protocol IAuthorizationInteractor {
 	/// Метод авторизации
 	/// - Parameter request: получает модель запроса, содержащую логин и пароль
-	func login(request: AuthorizationModel.Request)
+	func makeRequest(request: AuthorizationModel.Request)
 }
 
 enum AuthorizationError: Error {
@@ -20,7 +20,7 @@ enum AuthorizationError: Error {
 }
 
 class AuthorizationInteractor: IAuthorizationInteractor {
-
+	
 	// MARK: - Dependencies
 
 	private var worker: IAuthorizationWorker
@@ -41,13 +41,14 @@ class AuthorizationInteractor: IAuthorizationInteractor {
 
 	// MARK: - Internal Methods
 
-	/// Метод логин производит авторизацию на сервере. В случае успеха полученный от сервера
-	/// Токен сохраняется в память устройства и производится переход к главной сцене.
-	/// В случае провала авторизации выполняется метод present(responce: )
-	/// AuthorizationPresenter, в качестве responce направляется полученная ошибка для дальнейшей обработки.
+	/// Метод makeRequest
 	/// - Parameter request: структура AuthorizationModels.Request содержит данные для авторизации.
-	func login(request: AuthorizationModel.Request) {
-		worker.login(login: request.login, password: request.password) {_ in
+	func makeRequest(request: AuthorizationModel.Request) {
+		switch request {
+		case .login(_):
+			print("login")
+		case .signUp:
+			coordinator.showRegistrationScene()
 		}
 	}
 }

@@ -1,32 +1,32 @@
 //
-//  AuthorizationViewController.swift
+//  RegistrationPresenter.swift
 //  FitnessTracker
 //
-//  Created by Вадим Гамзаев on 10.06.2023.
+//  Created by Вадим Гамзаев on 21.06.2023.
 //
 
 import Foundation
 
-protocol IAuthorizationPresenter {
-	func present(responce: AuthorizationModel.Response)
+protocol IRegistrationPresenter {
+	func present(responce: RegistrationModel.Response)
 }
 
-class AuthorizationPresenter: IAuthorizationPresenter {
+class RegistrationPresenter: IRegistrationPresenter {
 
 	// MARK: - Dependencies
 
-	private weak var viewController: IAuthorizationViewController?
+	private weak var viewController: IRegistrationViewController?
 
 	// MARK: - Lifecycle
 
-	init(viewController: IAuthorizationViewController?) {
+	init(viewController: IRegistrationViewController?) {
 		self.viewController = viewController
 	}
 
 	// MARK: - Internal Methods
 
-	func present(responce: AuthorizationModel.Response) {
-		let viewModel = AuthorizationModel.ViewModel(
+	func present(responce: RegistrationModel.Response) {
+		let viewModel = RegistrationModel.ViewModel(
 			errorMessage: (handleError(error: responce.error))
 		)
 		viewController?.render(viewModel: viewModel)

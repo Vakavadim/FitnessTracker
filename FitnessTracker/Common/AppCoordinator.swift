@@ -63,6 +63,10 @@ final class AppCoordinator: IAppCoordinator {
 	/// Метод для старта сценария главного экрана
 	func showMainFlow() {
 	}
+	
+	func popToRootViewController() {
+		navigationController.popToRootViewController(animated: true)
+	}
 }
 
 // MARK: - ICoordinatorFinishDelegate
@@ -71,6 +75,7 @@ extension AppCoordinator: ICoordinatorFinishDelegate {
 	func didFinish(_ coordinator: ICoordinator) {
 		if coordinator is IAuthorizationCoordinator {
 			childCoordinators.removeAll { $0 === coordinator }
+			popToRootViewController()
 			showMainFlow()
 		}
 	}

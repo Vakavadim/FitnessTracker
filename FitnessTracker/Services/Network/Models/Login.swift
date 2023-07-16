@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Login {
+struct Login {
 	let rawValue: String
 
 	init(_ rawValue: String) {

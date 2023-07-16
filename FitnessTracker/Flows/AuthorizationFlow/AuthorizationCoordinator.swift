@@ -9,8 +9,9 @@ import UIKit
 
 /// Протокол координатора экрана авторизации.
 protocol IAuthorizationCoordinator: ICoordinator {
-	func showAuthorizationFlow()
-	func showMainFlow()
+	func showAuthorizationScene()
+	func showRegistrationScene()
+	func showRecoverPasswordScene()
 }
 
 /// Координатор экрана авторизации.
@@ -36,16 +37,24 @@ class AuthorizationCoordinator: IAuthorizationCoordinator {
 
 	/// Запуск и отображения сцены авторизации.
 	func start(_ flow: Flow? = nil) {
-		showAuthorizationFlow()
+		showAuthorizationScene()
 	}
 	
 	/// Стартует сценарий сцены авторизации.
-	func showAuthorizationFlow() {
+	func showAuthorizationScene() {
+		let authorizationViewController = AuthorizationAssembler.assembly(coordinator: self)
+		navigationController.pushViewController(authorizationViewController, animated: true)
+	}
+	
+	/// Стартует сценарий сцены регистрации.
+	func showRegistrationScene() {
+		let registrationViewController = RegistrationAssembler.assembly(coordinator: self)
+		navigationController.pushViewController(registrationViewController, animated: true)
+	}
+	
+	/// Стартует сценарий сцены востановления пароля.
+	func showRecoverPasswordScene() {
 		let authorizationViewController = AuthorizationAssembler.assembly(coordinator: self)
 		navigationController.setViewControllers([authorizationViewController], animated: false)
-	}
-
-	/// Стартует сценарий главной сцены.
-	func showMainFlow() {
 	}
 }
