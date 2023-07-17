@@ -8,16 +8,23 @@
 import Foundation
 
 enum RegistrationModel {
-	struct Request {
-		var login: Login
-		var password: Password
+	enum Request {
+		case createUser(RegistrationData)
+	}
+	
+	struct RegistrationData {
+		let name: Name
+		let email: Email
+		let password: Password
+		let repPassword: Password
 	}
 
-	struct Response {
-		var error: Error
+	enum Response {
+		case success(Email)
+		case error(Error)
 	}
 
 	struct ViewModel {
-		let errorMessage: String
+		let message: String
 	}
 }

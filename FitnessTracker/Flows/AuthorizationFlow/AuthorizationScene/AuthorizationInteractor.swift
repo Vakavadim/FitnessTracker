@@ -45,10 +45,22 @@ class AuthorizationInteractor: IAuthorizationInteractor {
 	/// - Parameter request: структура AuthorizationModels.Request содержит данные для авторизации.
 	func makeRequest(request: AuthorizationModel.Request) {
 		switch request {
-		case .login(_):
-			print("login")
+		case .login(let authData):
+			worker.login(login: authData.login, password: authData.password) { authResult in
+				switch authResult {
+				case .success(let user):
+					print(user.name)
+				case .failure(let error):
+					print(error.localizedDescription)
+				}
+			}
 		case .signUp:
 			coordinator.showRegistrationScene()
+		case .forgotPass:
+			coordinator.showPasswordRecoveryScene()
 		}
 	}
+	
+	// Заглушка чтоб линтер не ругался
+	func login() { }
 }

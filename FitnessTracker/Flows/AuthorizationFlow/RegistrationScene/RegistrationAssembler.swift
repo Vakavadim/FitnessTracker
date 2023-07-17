@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class RegistrationAssembler {
+final class RegistrationAssembler { // swiftlint:disable:this convenience_type
 	static func assembly(coordinator: IAuthorizationCoordinator) -> UIViewController {
 
 		let registrationViewController = RegistrationViewController()

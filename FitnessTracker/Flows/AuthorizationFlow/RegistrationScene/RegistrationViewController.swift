@@ -8,10 +8,6 @@
 import UIKit
 import PinLayout
 
-#if DEBUG
-import SwiftUI
-#endif
-
 protocol IRegistrationViewController: AnyObject {
 	func render(viewModel: RegistrationModel.ViewModel)
 }
@@ -27,6 +23,40 @@ class RegistrationViewController: UIViewController {
 	private lazy var textFieldEmail: UITextField = makeEmailTextField()
 	private lazy var textFieldPass: UITextField = makePassTextField()
 	private lazy var textFieldRepeatPass: UITextField = makePassRepeatTextField()
+	private lazy var signUpButtom: UIButton = makeSignUpButton()
+	
+	private var nameText: String {
+		get {
+			textFieldName.text ?? ""
+		}
+		set {
+			textFieldName.text = newValue
+		}
+	}
+	private var emailText: String {
+		get {
+			textFieldEmail.text ?? ""
+		}
+		set {
+			textFieldEmail.text = newValue
+		}
+	}
+	private var passText: String {
+		get {
+			textFieldPass.text ?? ""
+		}
+		set {
+			textFieldPass.text = newValue
+		}
+	}
+	private var repPassText: String {
+		get {
+			textFieldRepeatPass.text ?? ""
+		}
+		set {
+			textFieldRepeatPass.text = newValue
+		}
+	}
 
 	// MARK: - Lifecycle
 
@@ -45,14 +75,25 @@ class RegistrationViewController: UIViewController {
 	private func setupUI() {
 		view.backgroundColor = Theme.backgroundColor
 		navigationController?.navigationBar.prefersLargeTitles = true
+		title = L10n.Authorization.registration
 	}
 
 	// MARK: - Actions
-
+	@objc
+	func makeSignUp() {
+		let registrtionData = RegistrationModel.RegistrationData(
+			name: Name(nameText),
+			email: Email(emailText),
+			password: Password(passText),
+			repPassword: Password(repPassText)
+		)
+		interactor?.makeRequest(request: .createUser(registrtionData))
+	}
 }
 
 extension RegistrationViewController: IRegistrationViewController {
 	func render(viewModel: RegistrationModel.ViewModel) {
+		printContent(viewModel.message)
 	}
 }
 
@@ -65,6 +106,7 @@ private extension RegistrationViewController {
 		view.addSubview(textFieldEmail)
 		view.addSubview(textFieldPass)
 		view.addSubview(textFieldRepeatPass)
+		view.addSubview(signUpButtom)
 
 		textFieldName
 			.pin
@@ -90,6 +132,13 @@ private extension RegistrationViewController {
 			.pin
 			.below(of: textFieldPass)
 			.marginTop(Sizes.Padding.normal)
+			.hCenter()
+			.width(Sizes.L.width)
+			.height(Sizes.S.height)
+		signUpButtom
+			.pin
+			.below(of: textFieldRepeatPass)
+			.marginTop(Sizes.Padding.double)
 			.hCenter()
 			.width(Sizes.L.width)
 			.height(Sizes.S.height)
@@ -130,14 +179,13 @@ private extension RegistrationViewController {
 
 		return textField
 	}
-}
-
-#if DEBUG
-struct Provider: PreviewProvider {
-	static var previews: some View {
-		Group {
-			RegistrationViewController().preview()
-		}
+	
+	func makeSignUpButton() -> UIButton {
+		let button = FilledButton(title: L10n.Authorization.signUp)
+		button.configuration?.baseBackgroundColor = Theme.accentColor
+		button.configuration?.baseForegroundColor = .white
+		
+		button.addTarget(self, action: #selector(makeSignUp), for: .touchUpInside)
+		return button
 	}
 }
-#endif

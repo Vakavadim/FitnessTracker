@@ -69,6 +69,10 @@ fileprivate enum Colors { // swiftlint:disable:this private_over_fileprivate
 		light: .white,
 		dark: FlatColor.Gray.SlateGray
 	)
+	static let whiteAndDarkPurpure = UIColor.color(
+		light: FlatColor.Purpure.LiloGrey,
+		dark: FlatColor.Yellow.LemonChiffon
+	)
 }
 
 enum Theme {
@@ -77,4 +81,5 @@ enum Theme {
 	static let textFieldBackgroundColor = Colors.white
 	static let blueButtonBackground = Colors.blue
 	static let orangeButtonBackground = Colors.orange
+	static let textFieldForegroundColor = Colors.whiteAndDarkPurpure
 }

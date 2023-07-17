@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class AuthorizationAssembler {
+final class AuthorizationAssembler { // swiftlint:disable:this convenience_type
 	static func assembly(coordinator: IAuthorizationCoordinator) -> UIViewController {
 
 		let authorizationViewController = AuthorizationViewController()

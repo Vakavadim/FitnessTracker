@@ -23,8 +23,14 @@ internal enum L10n {
     internal static let orLabel = L10n.tr("Localizable", "Authorization.orLabel")
     /// Forgot password?
     internal static let passwordRecovery = L10n.tr("Localizable", "Authorization.passwordRecovery")
+    /// Reset
+    internal static let recoveryButtonTitle = L10n.tr("Localizable", "Authorization.recoveryButtonTitle")
     /// Create account
     internal static let registration = L10n.tr("Localizable", "Authorization.registration")
+    /// Reset password
+    internal static let resetPassword = L10n.tr("Localizable", "Authorization.resetPassword")
+    /// Sign up
+    internal static let signUp = L10n.tr("Localizable", "Authorization.signUp")
     /// Authorization
     internal static let title = L10n.tr("Localizable", "Authorization.title")
 
@@ -42,6 +48,10 @@ internal enum L10n {
       internal static let password = L10n.tr("Localizable", "Authorization.placeholder.password")
       /// Repeat password
       internal static let passwordRepeat = L10n.tr("Localizable", "Authorization.placeholder.passwordRepeat")
+      /// New Password
+      internal static let resetPassword = L10n.tr("Localizable", "Authorization.placeholder.resetPassword")
+      /// Repeat new password
+      internal static let resetPasswordRepeat = L10n.tr("Localizable", "Authorization.placeholder.resetPasswordRepeat")
     }
   }
 

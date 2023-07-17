@@ -9,14 +9,15 @@ import Foundation
 
 protocol IRegistrationWorker {
 	func register(
-		login: Login,
+		name: Name,
+		login: Email,
 		password: Password,
 		completion: @escaping (RegistrationResult) -> Void
 	)
 }
 
 enum RegistrationResult {
-	case success(AuthToken)
+	case success(User)
 	case failure(Error)
 }
 
@@ -35,10 +36,22 @@ class RegistrationWorker: IRegistrationWorker {
 	// MARK: - Internal Methods
 
 	func register(
-		login: Login,
+		name: Name,
+		login: Email,
 		password: Password,
 		completion: @escaping (RegistrationResult) -> Void
 	) {
-		authManager.register(login: login, password: password)
+		authManager.register(
+			name: name,
+			email: login,
+			password: password
+		) { result in
+			switch result {
+			case .failure(let error):
+				completion(.failure(error))
+			case .success(let user):
+				completion(.success(user))
+			}
+		}
 	}
 }

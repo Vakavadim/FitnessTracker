@@ -8,20 +8,22 @@
 import UIKit
 
 final class FilledButton: UIButton {
-	let text: String
+	let title: String
 
-	init(text: String, backgroundColor: UIColor) {
-		self.text = text
+	init(title: String) {
+		self.title = title
 		super.init(frame: CGRect())
-
-		var attributedString = AttributedString(text)
+		setupUI()
+	}
+	
+	private func setupUI() {
+		var attributedString = AttributedString(self.title)
 		var container = AttributeContainer()
 		container.font = UIFont.preferredFont(forTextStyle: .headline)
 		attributedString.mergeAttributes(container, mergePolicy: .keepNew)
 
 		self.configuration = .filled()
 		self.configuration?.cornerStyle = .medium
-		self.configuration?.baseForegroundColor = Theme.accentColor
 		self.configuration?.attributedTitle = attributedString
 	}
 

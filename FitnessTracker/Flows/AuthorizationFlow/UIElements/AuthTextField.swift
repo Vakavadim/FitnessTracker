@@ -11,8 +11,12 @@ final class AuthTextField: UITextField {
 
 	override init(frame: CGRect) {
 		super.init(frame: frame)
+		setupUI()
+	}
+	
+	private func setupUI() {
 		self.backgroundColor = Theme.textFieldBackgroundColor
-		self.textColor = .black
+		self.textColor = Theme.textFieldForegroundColor
 		self.layer.borderWidth = Sizes.borderWidth
 		self.layer.cornerRadius = Sizes.cornerRadius
 		self.layer.borderColor = UIColor.lightGray.cgColor

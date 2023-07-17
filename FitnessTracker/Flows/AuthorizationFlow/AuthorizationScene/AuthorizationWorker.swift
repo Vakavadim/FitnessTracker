@@ -9,14 +9,14 @@ import Foundation
 
 protocol IAuthorizationWorker {
 	func login(
-		login: Login,
+		login: Email,
 		password: Password,
 		completion: @escaping (AuthorizationResult) -> Void
 	)
 }
 
 enum AuthorizationResult {
-	case success
+	case success(User)
 	case failure(Error)
 }
 
@@ -35,10 +35,20 @@ class AuthorizationWorker: IAuthorizationWorker {
 	// MARK: - Internal Methods
 
 	func login(
-		login: Login,
+		login: Email,
 		password: Password,
 		completion: @escaping (AuthorizationResult) -> Void
 	) {
-		authManager.login(login: login, password: password)
+		authManager.login(email: login, password: password) { [weak self] authResult in
+			guard let self = self else { return }
+			DispatchQueue.main.async {
+				switch authResult {
+				case .failure(let error):
+					completion(AuthorizationResult.failure(error))
+				case .success(let user):
+					completion(AuthorizationResult.success(user))
+				}
+			}
+		}
 	}
 }

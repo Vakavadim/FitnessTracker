@@ -26,10 +26,18 @@ class RegistrationPresenter: IRegistrationPresenter {
 	// MARK: - Internal Methods
 
 	func present(responce: RegistrationModel.Response) {
-		let viewModel = RegistrationModel.ViewModel(
-			errorMessage: (handleError(error: responce.error))
-		)
-		viewController?.render(viewModel: viewModel)
+		switch responce {
+		case .success(let email):
+			let viewModel = RegistrationModel.ViewModel(
+				message: "We have sent you an email adress to approve \(email.rawValue)"
+			)
+			viewController?.render(viewModel: viewModel)
+		case .error(let error):
+			let viewModel = RegistrationModel.ViewModel(
+				message: (handleError(error: error))
+			)
+			viewController?.render(viewModel: viewModel)
+		}
 	}
 
 	// MARK: - Private Methods

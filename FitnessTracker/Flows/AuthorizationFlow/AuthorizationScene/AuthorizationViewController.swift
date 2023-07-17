@@ -72,7 +72,7 @@ class AuthorizationViewController: UIViewController {
 	@objc
 	func signIn() {
 		let loginData = AuthorizationModel.LoginData(
-			login: Login(loginText),
+			login: Email(loginText),
 			password: Password(passText)
 		)
 
@@ -94,6 +94,7 @@ class AuthorizationViewController: UIViewController {
 	
 	@objc
 	func passRecovery() {
+		interactor?.makeRequest(request: .forgotPass)
 	}
 }
 
@@ -213,20 +214,10 @@ private extension AuthorizationViewController {
 	}
 
 	func makeButtonSignIn() -> UIButton {
-		let button = UIButton()
-		
-		var attributedString = AttributedString(L10n.Authorization.authorization)
-		var container = AttributeContainer()
-		container.font = UIFont.preferredFont(forTextStyle: .headline)
-		attributedString.mergeAttributes(container, mergePolicy: .keepNew)
-		
-		button.configuration = .filled()
-		button.configuration?.title = L10n.Authorization.authorization
-		button.configuration?.cornerStyle = .medium
-		button.configuration?.baseForegroundColor = .white
-		
+		let button = FilledButton(title: L10n.Authorization.authorization)
 		button.configuration?.baseBackgroundColor = Theme.accentColor
-		button.configuration?.attributedTitle = attributedString
+		button.configuration?.baseForegroundColor = .white
+
 		button.addTarget(self, action: #selector(signIn), for: .touchUpInside)
 		button.translatesAutoresizingMaskIntoConstraints = false
 
@@ -234,21 +225,10 @@ private extension AuthorizationViewController {
 	}
 	
 	func makeButtonFacebookSignIn() -> UIButton {
-		let button = UIButton()
-		
-		var attributedString = AttributedString(L10n.Authorization.facebookSignIn)
-		var container = AttributeContainer()
-		container.font = UIFont.preferredFont(forTextStyle: .headline)
-		attributedString.mergeAttributes(container, mergePolicy: .keepNew)
-		
-		button.configuration = .filled()
+		let button = FilledButton(title: L10n.Authorization.facebookSignIn)
 		button.configuration?.baseBackgroundColor = Theme.blueButtonBackground
-		button.configuration?.cornerStyle = .medium
 		button.configuration?.baseForegroundColor = .white
-		button.configuration?.attributedTitle = attributedString
-		button.addTarget(self, action: #selector(facebookSignIn), for: .touchUpInside)
-		button.translatesAutoresizingMaskIntoConstraints = false
-		
+
 		let imageContainerView = UIView()
 		imageContainerView.translatesAutoresizingMaskIntoConstraints = false
 		button.addSubview(imageContainerView)
@@ -270,22 +250,16 @@ private extension AuthorizationViewController {
 			]
 		)
 
+		button.addTarget(self, action: #selector(facebookSignIn), for: .touchUpInside)
+		button.translatesAutoresizingMaskIntoConstraints = false
+
 		return button
 	}
 	
 	func makeButtonGoogleSignIn() -> UIButton {
-		let button = UIButton()
-		
-		var attributedString = AttributedString(L10n.Authorization.googleSignIn)
-		var container = AttributeContainer()
-		container.font = UIFont.preferredFont(forTextStyle: .headline)
-		attributedString.mergeAttributes(container, mergePolicy: .keepNew)
-
-		button.configuration = .filled()
+		let button = FilledButton(title: L10n.Authorization.googleSignIn)
 		button.configuration?.baseBackgroundColor = Theme.orangeButtonBackground
-		button.configuration?.cornerStyle = .medium
 		button.configuration?.baseForegroundColor = .white
-		button.configuration?.attributedTitle = attributedString
 		
 		let imageContainerView = UIView()
 		imageContainerView.translatesAutoresizingMaskIntoConstraints = false

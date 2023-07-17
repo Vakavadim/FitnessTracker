@@ -15,8 +15,13 @@
 "Authorization.placeholder.email" = "Email";
 "Authorization.placeholder.password" = "Password";
 "Authorization.placeholder.passwordRepeat" = "Repeat password";
+"Authorization.placeholder.resetPassword" = "New Password";
+"Authorization.placeholder.resetPasswordRepeat" = "Repeat new password";
 "Authorization.registration" = "Create account";
+"Authorization.signUp" = "Sign up";
+"Authorization.resetPassword" = "Reset password";
 "Authorization.passwordRecovery" = "Forgot password?";
+"Authorization.recoveryButtonTitle" = "Reset";
 "Authorization.googleSignIn" = "Sign in with Google";
 "Authorization.facebookSignIn" = "Sign in with Facebook";
 "Authorization.title" = "Authorization";

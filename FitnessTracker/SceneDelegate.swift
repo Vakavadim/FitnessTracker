@@ -21,6 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		let window = UIWindow(windowScene: scene)
 
 		let navigationController = UINavigationController(rootViewController: UIViewController())
+		navigationController.navigationBar.largeTitleTextAttributes = [.foregroundColor: Theme.textFieldForegroundColor]
 		appCoordinator = AppCoordinator(navigationController: navigationController)
 
 		window.rootViewController = navigationController

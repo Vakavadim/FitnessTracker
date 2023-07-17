@@ -12,10 +12,11 @@ enum AuthorizationModel {
 	enum Request {
 		case login(LoginData)
 		case signUp
+		case forgotPass
 	}
 
 	struct LoginData {
-		var login: Login
+		var login: Email
 		var password: Password
 	}
 

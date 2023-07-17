@@ -8,6 +8,7 @@
 import Foundation
 
 protocol IAuthManager {
-	func login(login: Login, password: Password)
-	func register(login: Login, password: Password)
+	func login(email: Email, password: Password, completion: @escaping (AuthResult) -> Void)
+	func register(name: Name, email: Email, password: Password, completion: @escaping (AuthResult) -> Void)
+	func resetPassword(email: Email, password: Password, completion: @escaping (AuthResult) -> Void)
 }

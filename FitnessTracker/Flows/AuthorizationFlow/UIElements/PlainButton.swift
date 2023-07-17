@@ -13,7 +13,10 @@ final class PlainButton: UIButton {
 	init(text: String) {
 		self.text = text
 		super.init(frame: CGRect())
-
+		setupUI()
+	}
+	
+	private func setupUI() {
 		var attributedString = AttributedString(text)
 		var container = AttributeContainer()
 		container.font = UIFont.preferredFont(forTextStyle: .headline)
