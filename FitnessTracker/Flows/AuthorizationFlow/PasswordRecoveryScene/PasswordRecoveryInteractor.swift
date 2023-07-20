@@ -42,5 +42,19 @@ class PasswordRecoveryInteractor: IPasswordRecoveryInteractor {
 	// MARK: - Internal Methods
 
 	func recoveryPassword(request: PasswordRecoveryModel.Request) {
+		switch request {
+		case .resetPass(let email):
+			worker.recoveryPassword(email: email) { [weak self] result in
+				guard let self = self else { return }
+				DispatchQueue.main.async {
+					switch result {
+					case .success(let email):
+						self.presenter?.present(responce: PasswordRecoveryModel.Response(result: .success(email)))
+					case .failure(let error):
+						self.presenter?.present(responce: PasswordRecoveryModel.Response(result: .failure(error)))
+					}
+				}
+			}
+		}
 	}
 }

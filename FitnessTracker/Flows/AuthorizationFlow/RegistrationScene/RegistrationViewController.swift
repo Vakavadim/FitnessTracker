@@ -93,7 +93,7 @@ class RegistrationViewController: UIViewController {
 
 extension RegistrationViewController: IRegistrationViewController {
 	func render(viewModel: RegistrationModel.ViewModel) {
-		printContent(viewModel.message)
+		print(viewModel.message)
 	}
 }
 

@@ -57,12 +57,15 @@ extension UIViewController {
 	}
 
 	/// Метод вызывает простой UIAlertController для отображения title и message
-	func presentAlert(title: String, message: String) {
+	func presentAlert(title: String, message: String, completion: (() -> Void)? = nil) {
 		let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-		alert.addAction(UIAlertAction(
+		let okAction = UIAlertAction(
 			title: L10n.Extensions.UIViewController.SimpleAlert.buttonTitle,
 			style: .default
-		))
+		) { _ in
+			completion?()
+		}
+		alert.addAction(okAction)
 		present(alert, animated: true)
 	}
 }

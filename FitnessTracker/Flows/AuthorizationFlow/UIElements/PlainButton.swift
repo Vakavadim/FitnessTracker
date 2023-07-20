@@ -19,7 +19,7 @@ final class PlainButton: UIButton {
 	private func setupUI() {
 		var attributedString = AttributedString(text)
 		var container = AttributeContainer()
-		container.font = UIFont.preferredFont(forTextStyle: .headline)
+		container.font = UIFont.preferredFont(forTextStyle: .callout)
 		attributedString.mergeAttributes(container, mergePolicy: .keepNew)
 
 		self.configuration = .plain()

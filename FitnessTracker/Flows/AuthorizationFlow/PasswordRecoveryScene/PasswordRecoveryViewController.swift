@@ -21,12 +21,19 @@ class PasswordRecoveryViewController: UIViewController {
 	// MARK: - Dependencies
 
 	var interactor: IPasswordRecoveryInteractor?
+	var email: Email?
 
 	// MARK: - Private properties
 	private lazy var textFieldEmail: UITextField = makeEmailTextField()
-	private lazy var textFieldPass: UITextField = makePasswordTextField()
-	private lazy var textFieldRepeatPass: UITextField = makePasswordRepeatTextField()
 	private lazy var changePassButtom: UIButton = makeChangePassButton()
+	private var emailText: String {
+		get {
+			textFieldEmail.text ?? ""
+		}
+		set {
+			textFieldEmail.text = newValue
+		}
+	}
 
 	// MARK: - Lifecycle
 
@@ -46,14 +53,30 @@ class PasswordRecoveryViewController: UIViewController {
 		view.backgroundColor = Theme.backgroundColor
 		navigationController?.navigationBar.prefersLargeTitles = true
 		title = L10n.Authorization.resetPassword
+		textFieldEmail.text = email?.rawValue ?? ""
 	}
 
 	// MARK: - Actions
-
+	@objc
+	func reset() {
+		interactor?.recoveryPassword(
+			request: .resetPass(Email(emailText))
+		)
+	}
 }
 
 extension PasswordRecoveryViewController: IPasswordRecoveryViewController {
 	func render(viewModel: PasswordRecoveryModel.ViewModel) {
+		switch viewModel {
+		case .success(let message):
+			self.presentAlert(title: "Success", message: message) {
+				self.navigationController?.popViewController(animated: true)
+			}
+		case .error(let errorMessage):
+			self.presentAlert(title: "Error", message: errorMessage) {
+				self.textFieldEmail.text = ""
+			}
+		}
 	}
 }
 
@@ -63,8 +86,6 @@ private extension PasswordRecoveryViewController {
 	/// при помощи библиотеки Pinlayout.
 	func layoutPinLayout() {
 		view.addSubview(textFieldEmail)
-		view.addSubview(textFieldPass)
-		view.addSubview(textFieldRepeatPass)
 		view.addSubview(changePassButtom)
 		
 		textFieldEmail
@@ -73,23 +94,9 @@ private extension PasswordRecoveryViewController {
 			.hCenter()
 			.width(Sizes.L.width)
 			.height(Sizes.S.height)
-		textFieldPass
-			.pin
-			.below(of: textFieldEmail)
-			.marginTop(Sizes.Padding.normal)
-			.hCenter()
-			.width(Sizes.L.width)
-			.height(Sizes.S.height)
-		textFieldRepeatPass
-			.pin
-			.below(of: textFieldPass)
-			.marginTop(Sizes.Padding.normal)
-			.hCenter()
-			.width(Sizes.L.width)
-			.height(Sizes.S.height)
 		changePassButtom
 			.pin
-			.below(of: textFieldRepeatPass)
+			.below(of: textFieldEmail)
 			.marginTop(Sizes.Padding.double)
 			.hCenter()
 			.width(Sizes.L.width)
@@ -104,29 +111,14 @@ private extension PasswordRecoveryViewController {
 
 		return textField
 	}
-	
-	func makePasswordTextField() -> UITextField {
-		let textField = AuthTextField()
-
-		textField.placeholder = L10n.Authorization.Placeholder.resetPassword
-		textField.translatesAutoresizingMaskIntoConstraints = false
-
-		return textField
-	}
-	
-	func makePasswordRepeatTextField() -> UITextField {
-		let textField = AuthTextField()
-
-		textField.placeholder = L10n.Authorization.Placeholder.resetPasswordRepeat
-		textField.translatesAutoresizingMaskIntoConstraints = false
-
-		return textField
-	}
 
 	func makeChangePassButton() -> UIButton {
 		let button = FilledButton(title: L10n.Authorization.recoveryButtonTitle)
 		button.configuration?.baseBackgroundColor = Theme.accentColor
 		button.configuration?.baseForegroundColor = .white
+		
+		button.addTarget(self, action: #selector(reset), for: .touchUpInside)
+		button.translatesAutoresizingMaskIntoConstraints = false
 		
 		return button
 	}

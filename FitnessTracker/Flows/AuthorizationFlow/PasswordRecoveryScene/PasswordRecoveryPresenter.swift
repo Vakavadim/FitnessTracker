@@ -26,10 +26,16 @@ class PasswordRecoveryPresenter: IPasswordRecoveryPresenter {
 	// MARK: - Internal Methods
 
 	func present(responce: PasswordRecoveryModel.Response) {
-		let viewModel = PasswordRecoveryModel.ViewModel(
-			errorMessage: (handleError(error: responce.error))
-		)
-		viewController?.render(viewModel: viewModel)
+		switch responce.result {
+		case .success(let email):
+			let message = "\(email)"
+			let viewModel = PasswordRecoveryModel.ViewModel.success(message)
+			viewController?.render(viewModel: viewModel)
+		case .failure(let error):
+			let message = handleError(error: error)
+			let viewModel = PasswordRecoveryModel.ViewModel.error(message)
+			viewController?.render(viewModel: viewModel)
+		}
 	}
 
 	// MARK: - Private Methods

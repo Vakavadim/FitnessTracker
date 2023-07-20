@@ -19,7 +19,7 @@ final class FilledButton: UIButton {
 	private func setupUI() {
 		var attributedString = AttributedString(self.title)
 		var container = AttributeContainer()
-		container.font = UIFont.preferredFont(forTextStyle: .headline)
+		container.font = UIFont.preferredFont(forTextStyle: .callout)
 		attributedString.mergeAttributes(container, mergePolicy: .keepNew)
 
 		self.configuration = .filled()

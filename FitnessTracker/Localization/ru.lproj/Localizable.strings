@@ -10,6 +10,8 @@
 "secondTitle" = "Второй тест";
 "CalendarView.WeekDays" = "В П В С Ч П С";
 
+"Extentions.presenAlert.Button.ok" = "Ок";
+
 "Authorization.authorization" = "Войти";
 "Authorization.placeholder.name" = "Имя";
 "Authorization.placeholder.email" = "Почта";
@@ -22,8 +24,8 @@
 "Authorization.resetPassword" = "Смена пароля";
 "Authorization.passwordRecovery" = "Забыли пароль?";
 "Authorization.recoveryButtonTitle" = "Сменить пароль";
-"Authorization.googleSignIn" = "Войти с аккаунтом Google";
-"Authorization.facebookSignIn" = "Войти с аккаунтом Facebook";
+"Authorization.googleSignIn" = "Войти с Google account";
+"Authorization.facebookSignIn" = "Войти с Facebook";
 "Authorization.title" = "Авторизация";
 "Authorization.orLabel" = "или";
 

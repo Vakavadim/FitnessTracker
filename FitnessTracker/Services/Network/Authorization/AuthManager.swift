@@ -51,6 +51,8 @@ final class AuthManager: IAuthManager {
 			changeRequest.displayName = name.rawValue
 			changeRequest.commitChanges()
 			
+			Auth.auth().currentUser?.sendEmailVerification()
+			
 			let firebaseUser = User(
 				uid: user.uid,
 				name: Name(user.displayName ?? ""),
@@ -60,12 +62,12 @@ final class AuthManager: IAuthManager {
 		}
 	}
 
-	func resetPassword(email: Email, password: Password, completion: @escaping (AuthResult) -> Void) {
+	func resetPassword(email: Email, completion: @escaping (Result<Email, Error>) -> Void) {
 		Auth.auth().sendPasswordReset(withEmail: email.rawValue) { error in
 			if let error = error {
-				completion(AuthResult.failure(error))
+				completion(.failure(error))
 			} else {
-				completion(AuthResult.success(User(uid: "", name: Name(""), email: email)))
+				completion(.success(email))
 			}
 		}
 	}

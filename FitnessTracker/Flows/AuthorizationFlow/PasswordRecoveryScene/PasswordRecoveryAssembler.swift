@@ -8,9 +8,10 @@
 import UIKit
 
 final class PasswordRecoveryAssembler { // swiftlint:disable:this convenience_type
-	static func assembly(coordinator: IAuthorizationCoordinator) -> UIViewController {
+	static func assembly(coordinator: IAuthorizationCoordinator, email: Email) -> UIViewController {
 
 		let passwordRecoveryViewController = PasswordRecoveryViewController()
+		passwordRecoveryViewController.email = email
 		let presenter = PasswordRecoveryPresenter(viewController: passwordRecoveryViewController)
 		let authManager = AuthManager()
 		let worker = PasswordRecoveryWorker(authManager: authManager)

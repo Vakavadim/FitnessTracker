@@ -94,7 +94,9 @@ class AuthorizationViewController: UIViewController {
 	
 	@objc
 	func passRecovery() {
-		interactor?.makeRequest(request: .forgotPass)
+		interactor?.makeRequest(
+			request: .forgotPass(Email(loginText))
+		)
 	}
 }
 
@@ -152,8 +154,8 @@ private extension AuthorizationViewController {
 			.pin
 			.hCenter()
 			.below(of: buttonSignIn)
-			.width(20)
-			.height(Sizes.S.width)
+			.width(Sizes.S.width)
+			.height(Sizes.S.height)
 		
 		line
 			.pin

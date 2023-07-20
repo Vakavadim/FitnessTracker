@@ -12,7 +12,7 @@ enum AuthorizationModel {
 	enum Request {
 		case login(LoginData)
 		case signUp
-		case forgotPass
+		case forgotPass(Email)
 	}
 
 	struct LoginData {

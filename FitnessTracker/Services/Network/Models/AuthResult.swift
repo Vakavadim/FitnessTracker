@@ -11,3 +11,8 @@ enum AuthResult {
 	case failure(Error)
 	case success(User)
 }
+
+enum PasswordResetResult {
+	case failure(Error)
+	case success(Email)
+}

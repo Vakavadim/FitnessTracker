@@ -56,8 +56,8 @@ class AuthorizationInteractor: IAuthorizationInteractor {
 			}
 		case .signUp:
 			coordinator.showRegistrationScene()
-		case .forgotPass:
-			coordinator.showPasswordRecoveryScene()
+		case .forgotPass(let email):
+			coordinator.showPasswordRecoveryScene(with: email)
 		}
 	}
 	

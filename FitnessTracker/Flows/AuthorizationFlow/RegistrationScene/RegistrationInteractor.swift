@@ -58,9 +58,11 @@ class RegistrationInteractor: IRegistrationInteractor {
 				DispatchQueue.main.async {
 					switch result {
 					case .success(let user):
-						self.presenter?.present(responce: .success(user.email))
+						print(user.name)
+//						self.presenter?.present(responce: .success(user.email))
 					case .failure(let error):
-						self.presenter?.present(responce: .error(error))
+						print(error.localizedDescription)
+//						self.presenter?.present(responce: .error(error))
 					}
 				}
 			}

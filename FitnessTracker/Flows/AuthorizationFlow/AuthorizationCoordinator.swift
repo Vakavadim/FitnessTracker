@@ -11,7 +11,7 @@ import UIKit
 protocol IAuthorizationCoordinator: ICoordinator {
 	func showAuthorizationScene()
 	func showRegistrationScene()
-	func showPasswordRecoveryScene()
+	func showPasswordRecoveryScene(with: Email)
 }
 
 /// Координатор экрана авторизации.
@@ -53,8 +53,8 @@ class AuthorizationCoordinator: IAuthorizationCoordinator {
 	}
 	
 	/// Стартует сценарий сцены востановления пароля.
-	func showPasswordRecoveryScene() {
-		let passwordRecoveryViewController = PasswordRecoveryAssembler.assembly(coordinator: self)
+	func showPasswordRecoveryScene(with email: Email) {
+		let passwordRecoveryViewController = PasswordRecoveryAssembler.assembly(coordinator: self, email: email)
 		navigationController.pushViewController(passwordRecoveryViewController, animated: true)
 	}
 }
