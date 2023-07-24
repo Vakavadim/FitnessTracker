@@ -45,6 +45,13 @@
 		E06B82B12A40CF2100829DE3 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06B82B02A40CF2100829DE3 /* Colors.swift */; };
 		E06DF1D029B90B3C004CE7F8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E06DF1D229B90B3C004CE7F8 /* Localizable.strings */; };
 		E0747A7929DD7FA000012CF4 /* OtherMonthDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0747A7829DD7FA000012CF4 /* OtherMonthDayCell.swift */; };
+		E0775FA62A6EDEE3008190CC /* ExercisesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0775FA52A6EDEE3008190CC /* ExercisesViewController.swift */; };
+		E0775FA82A6EDF09008190CC /* ExercisesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0775FA72A6EDF09008190CC /* ExercisesInteractor.swift */; };
+		E0775FAA2A6EDF1C008190CC /* ExercisesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0775FA92A6EDF1C008190CC /* ExercisesPresenter.swift */; };
+		E0775FAC2A6EDF37008190CC /* ExercisesAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0775FAB2A6EDF37008190CC /* ExercisesAssembler.swift */; };
+		E0775FAE2A6EDF4D008190CC /* ExercisesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0775FAD2A6EDF4D008190CC /* ExercisesModel.swift */; };
+		E0775FB02A6EDF5D008190CC /* ExercisesWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0775FAF2A6EDF5D008190CC /* ExercisesWorker.swift */; };
+		E07BD9142A6C12820095BB01 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07BD9132A6C12820095BB01 /* MainTabBarController.swift */; };
 		E086BA0B29B8FC1600527E6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E086BA0A29B8FC1600527E6B /* AppDelegate.swift */; };
 		E086BA0D29B8FC1600527E6B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E086BA0C29B8FC1600527E6B /* SceneDelegate.swift */; };
 		E086BA1429B8FC1700527E6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E086BA1329B8FC1700527E6B /* Assets.xcassets */; };
@@ -144,6 +151,13 @@
 		E06DF1D129B90B3C004CE7F8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E06DF1D329B90BCE004CE7F8 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E0747A7829DD7FA000012CF4 /* OtherMonthDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherMonthDayCell.swift; sourceTree = "<group>"; };
+		E0775FA52A6EDEE3008190CC /* ExercisesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesViewController.swift; sourceTree = "<group>"; };
+		E0775FA72A6EDF09008190CC /* ExercisesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesInteractor.swift; sourceTree = "<group>"; };
+		E0775FA92A6EDF1C008190CC /* ExercisesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesPresenter.swift; sourceTree = "<group>"; };
+		E0775FAB2A6EDF37008190CC /* ExercisesAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesAssembler.swift; sourceTree = "<group>"; };
+		E0775FAD2A6EDF4D008190CC /* ExercisesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesModel.swift; sourceTree = "<group>"; };
+		E0775FAF2A6EDF5D008190CC /* ExercisesWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesWorker.swift; sourceTree = "<group>"; };
+		E07BD9132A6C12820095BB01 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		E086BA0729B8FC1600527E6B /* FitnessTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FitnessTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E086BA0A29B8FC1600527E6B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E086BA0C29B8FC1600527E6B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -307,7 +321,9 @@
 			isa = PBXGroup;
 			children = (
 				E04102F02A692DE2009F665B /* MainCoordinator.swift */,
+				E07BD9132A6C12820095BB01 /* MainTabBarController.swift */,
 				E04102F22A692DE5009F665B /* MainScene */,
+				E07BD9152A6C134C0095BB01 /* ExercisesScene */,
 			);
 			path = MainFlow;
 			sourceTree = "<group>";
@@ -340,6 +356,19 @@
 				E06B82AC2A40CE9300829DE3 /* UIColor+HEX.swift */,
 			);
 			path = Colors;
+			sourceTree = "<group>";
+		};
+		E07BD9152A6C134C0095BB01 /* ExercisesScene */ = {
+			isa = PBXGroup;
+			children = (
+				E0775FA52A6EDEE3008190CC /* ExercisesViewController.swift */,
+				E0775FA72A6EDF09008190CC /* ExercisesInteractor.swift */,
+				E0775FA92A6EDF1C008190CC /* ExercisesPresenter.swift */,
+				E0775FAB2A6EDF37008190CC /* ExercisesAssembler.swift */,
+				E0775FAD2A6EDF4D008190CC /* ExercisesModel.swift */,
+				E0775FAF2A6EDF5D008190CC /* ExercisesWorker.swift */,
+			);
+			path = ExercisesScene;
 			sourceTree = "<group>";
 		};
 		E086B9FE29B8FC1600527E6B = {
@@ -756,15 +785,19 @@
 				E038FA3E29D882C900597462 /* Strings.swift in Sources */,
 				E08E7DA42A3BAB44003842BB /* StartEntity.swift in Sources */,
 				E0021CE92A3B81C5000E1120 /* ICoordinator.swift in Sources */,
+				E0775FAA2A6EDF1C008190CC /* ExercisesPresenter.swift in Sources */,
 				E0B233932A563AA600658D62 /* AuthTextField.swift in Sources */,
 				E038FA4129D8833400597462 /* Assets.swift in Sources */,
 				E0614D702A6449C500D25EE9 /* FilledButton.swift in Sources */,
 				E04102F12A692DE2009F665B /* MainCoordinator.swift in Sources */,
 				E0E6445B2A127C93004EE783 /* CalendarManager.swift in Sources */,
 				E04102FA2A6930A9009F665B /* MainAssembler.swift in Sources */,
+				E0775FAE2A6EDF4D008190CC /* ExercisesModel.swift in Sources */,
 				E0021CED2A3B824F000E1120 /* AppCoordinator.swift in Sources */,
+				E07BD9142A6C12820095BB01 /* MainTabBarController.swift in Sources */,
 				E0E6445D2A13B48F004EE783 /* CalendarManagerDataModel.swift in Sources */,
 				E06B82AF2A40CE9400829DE3 /* UIColor+Dynamic.swift in Sources */,
+				E0775FAC2A6EDF37008190CC /* ExercisesAssembler.swift in Sources */,
 				E0021CEB2A3B81FD000E1120 /* Flow.swift in Sources */,
 				E0B233952A563D0100658D62 /* PlainButton.swift in Sources */,
 				E0E2F37D29CA1C0C004A7616 /* Exercise.swift in Sources */,
@@ -772,6 +805,7 @@
 				E02E21EB2A657BC400A073BD /* AuthResult.swift in Sources */,
 				E06B82AE2A40CE9400829DE3 /* UIColor+HEX.swift in Sources */,
 				E0B18A622A433025009FE7C6 /* RegistrationViewController.swift in Sources */,
+				E0775FB02A6EDF5D008190CC /* ExercisesWorker.swift in Sources */,
 				E08E7DAE2A3BABB2003842BB /* AuthorizationModel.swift in Sources */,
 				E08E7DA22A3BAB0C003842BB /* AuthContext.swift in Sources */,
 				E0B18A642A433035009FE7C6 /* RegistrationInteractor.swift in Sources */,
@@ -781,6 +815,7 @@
 				E05A7E4729CE059A000EBA1C /* CalendarView.swift in Sources */,
 				E0B18A662A433043009FE7C6 /* RegistrationPresenter.swift in Sources */,
 				E0747A7929DD7FA000012CF4 /* OtherMonthDayCell.swift in Sources */,
+				E0775FA62A6EDEE3008190CC /* ExercisesViewController.swift in Sources */,
 				E02E21E92A657ABC00A073BD /* Name.swift in Sources */,
 				E06B82B12A40CF2100829DE3 /* Colors.swift in Sources */,
 				E0B18A682A433084009FE7C6 /* RegistrationAssembler.swift in Sources */,
@@ -789,6 +824,7 @@
 				E0614D7C2A6488E500D25EE9 /* PasswordRecoveryWorker.swift in Sources */,
 				E02119B62A20CFE400038455 /* CalendarView+MakeUIObjectMethods.swift in Sources */,
 				E08E7DAC2A3BABB2003842BB /* AuthorizationViewController.swift in Sources */,
+				E0775FA82A6EDF09008190CC /* ExercisesInteractor.swift in Sources */,
 				E0B18A6A2A433094009FE7C6 /* RegistrationModel.swift in Sources */,
 				E08E7DAF2A3BABB2003842BB /* AuthorizationWorker.swift in Sources */,
 				E0A76A0C2A23BDE50037602F /* CurrentMonthCollectionView.swift in Sources */,

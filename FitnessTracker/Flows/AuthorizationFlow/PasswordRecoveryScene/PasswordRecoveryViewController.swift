@@ -8,10 +8,6 @@
 import UIKit
 import PinLayout
 
-#if DEBUG
-import SwiftUI
-#endif
-
 protocol IPasswordRecoveryViewController: AnyObject {
 	func render(viewModel: PasswordRecoveryModel.ViewModel)
 }
@@ -123,13 +119,3 @@ private extension PasswordRecoveryViewController {
 		return button
 	}
 }
-
-#if DEBUG
-struct Provider: PreviewProvider {
-	static var previews: some View {
-		Group {
-			PasswordRecoveryViewController().preview()
-		}
-	}
-}
-#endif

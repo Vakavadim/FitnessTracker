@@ -9,13 +9,14 @@ import UIKit
 import PinLayout
 import SwiftUI
 
+/// Протокол CalendarViewDelegate
 protocol CalendarViewDelegate: AnyObject {
 	func didSelectedDate(date: Date)
 }
 
-protocol CalendarViewData {
-	func updateCollectionViewLayout()
-	func dateSelected() -> Date
+/// Протокол CalendarViewDelegate
+protocol CalendarDataSource: AnyObject {
+	func dateSelected()
 }
 
 protocol ICalendarView: AnyObject {
@@ -38,7 +39,7 @@ class CalendarView: UIView {
 	private lazy var resizeButton: UIButton = makeButton()
 	private lazy var scrollView: UIScrollView = makeScrollView()
 	
-	private var presenter: ICalendarPresenter! // swiftlint:disable:this implicitly_unwrapped_optional
+	private var presenter: ICalendarPresenter?
 	private var viewData = CalendarModel.ViewModel(
 			dateString: "",
 			calendarViewSize: CGRect(),
@@ -50,7 +51,7 @@ class CalendarView: UIView {
 	init() {
 		super.init(frame: .zero)
 		assemble()
-		presenter.viewIsReady()
+		presenter?.viewIsReady()
 		setupView()
 		setBounds()
 		setupScrollView()
@@ -168,7 +169,7 @@ class CalendarView: UIView {
 	
 	/// Метод changeCalendarSize меняет значение переменной isWeekCalendar,
 	@objc func changeCalendarSize() {
-		presenter.didPressResizeButton()
+		presenter?.didPressResizeButton()
 		setBounds()
 	}
 }
@@ -185,11 +186,12 @@ extension CalendarView: UICollectionViewDelegate, UICollectionViewDataSource {
 			indexPath: indexPath,
 			model: self.viewData.calendarDays[indexPath.item]
 		)
+
 		return cell
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		let date = self.presenter.didSelectedDate(indexPath: indexPath)
+		guard let date = self.presenter?.didSelectedDate(indexPath: indexPath) else { return }
 		self.dateLabel.text = viewData.dateString
 		self.delegate?.didSelectedDate(date: date)
 	}
@@ -297,12 +299,12 @@ extension CalendarView: UIScrollViewDelegate {
 
 		if (self.rightCollectionView.frame.maxX - gap) < currentRightOffset {
 			scrollView.contentOffset.x -= self.centerCollectionView.frame.width + spacing
-			presenter.forward()
+			presenter?.forward()
 			self.dateLabel.text = viewData.dateString
 			centerCollectionView.reloadData()
 		} else if (self.leftCollectionView.frame.minX + gap) > scrollView.contentOffset.x {
 			scrollView.contentOffset.x += self.centerCollectionView.frame.width + spacing
-			presenter.back()
+			presenter?.back()
 			self.dateLabel.text = viewData.dateString
 			centerCollectionView.reloadData()
 		}

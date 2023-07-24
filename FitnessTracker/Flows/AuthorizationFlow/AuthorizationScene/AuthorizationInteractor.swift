@@ -48,8 +48,10 @@ class AuthorizationInteractor: IAuthorizationInteractor {
 		case .login(let authData):
 			worker.login(login: authData.login, password: authData.password) { authResult in
 				switch authResult {
-				case .success(let user):
-					print(user.name)
+				case .success(_):
+					let context = AuthContext()
+					context.setAuthDate(date: Date())
+					self.coordinator.finish()
 				case .failure(let error):
 					print(error.localizedDescription)
 				}

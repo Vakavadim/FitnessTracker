@@ -1,32 +1,32 @@
 //
-//  MainInteractor.swift
+//  ExercisesInteractor.swift
 //  FitnessTracker
 //
-//  Created by Вадим Гамзаев on 20.07.2023.
+//  Created by Вадим Гамзаев on 24.07.2023.
 //
 
 import Foundation
 
 /// Протокол для реализации авторизации
-protocol IMainInteractor {
+protocol IExercisesInteractor {
 	/// Метод авторизации
 	/// - Parameter request: получает модель запроса, содержащую логин и пароль
-	func makeRequest(request: MainModel.Request)
+	func makeRequest(request: ExercisesModel.Request)
 }
 
-class MainInteractor: IMainInteractor {
+class ExercisesInteractor: IExercisesInteractor {
 
 	// MARK: - Dependencies
 
-	private var worker: IMainWorker
-	private var presenter: IMainPresenter?
+	private var worker: IExercisesWorker
+	private var presenter: IExercisesPresenter?
 	private let coordinator: IMainCoordinator
 
 	// MARK: - Lifecycle
 
 	init(
-		worker: IMainWorker,
-		presenter: IMainPresenter,
+		worker: IExercisesWorker,
+		presenter: IExercisesPresenter,
 		coordinator: IMainCoordinator
 	) {
 		self.worker = worker
@@ -36,6 +36,6 @@ class MainInteractor: IMainInteractor {
 
 	// MARK: - Internal Methods
 
-	func makeRequest(request: MainModel.Request) {
+	func makeRequest(request: ExercisesModel.Request) {
 	}
 }

@@ -1,13 +1,13 @@
 //
-//  MainModel.swift
+//  ExercisesModel.swift
 //  FitnessTracker
 //
-//  Created by Вадим Гамзаев on 20.07.2023.
+//  Created by Вадим Гамзаев on 24.07.2023.
 //
 
 import Foundation
 
-enum MainModel {
+enum ExercisesModel {
 	enum Request {
 		case someCase
 	}

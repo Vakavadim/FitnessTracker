@@ -62,6 +62,10 @@ final class AppCoordinator: IAppCoordinator {
 
 	/// Метод для старта сценария главного экрана
 	func showMainFlow() {
+		let mainCoordinator = MainCoordinator(navigationController: navigationController)
+		mainCoordinator.finishDelegate = self
+		childCoordinators.append(mainCoordinator)
+		mainCoordinator.start()
 	}
 	
 	func popToRootViewController() {
