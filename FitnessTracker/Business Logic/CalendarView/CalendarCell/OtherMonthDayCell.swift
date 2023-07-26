@@ -46,11 +46,6 @@ class OtherMonthDayCell: UICollectionViewCell {
 		let dateFormator = DateFormatter()
 		dateFormator.dateFormat = "d"
 		titleLabel.text = dateFormator.string(from: dayData.date)
-		if dayData.isCurrent {
-			currentDayIndicatorView.isHidden = false
-		} else {
-			currentDayIndicatorView.isHidden = true
-		}
 	}
 }
 

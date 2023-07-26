@@ -36,7 +36,9 @@ final class WorkoutManagerTests: XCTestCase {
 		)
 		sut.addExercise(exercise: newExercise)
 		
-		let exercisesFromDate = sut.getWorkoutOf(newDate).filter { $0.date == newDate }
+		let exercisesFromDate = sut.getWorkoutOf(newDate).filter {
+			$0.date == newDate
+		}
 		
 		XCTAssertFalse(
 			exercisesFromDate.isEmpty,

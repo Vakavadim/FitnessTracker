@@ -14,6 +14,7 @@ class CurrentMonthDayCell: UICollectionViewCell {
 	private lazy var titleLabel: UILabel = makeLabel()
 	private lazy var currentDayIndicatorView: UIView = makeView()
 	private lazy var selectedDayIndicatorView: UIView = makeView()
+	private lazy var isIncludeWorkout: UIView = makePin()
 	
 	 // MARK: - Initializers
 	override init(frame: CGRect) {
@@ -37,6 +38,7 @@ class CurrentMonthDayCell: UICollectionViewCell {
 		contentView.addSubview(currentDayIndicatorView)
 		contentView.addSubview(selectedDayIndicatorView)
 		contentView.addSubview(titleLabel)
+		contentView.addSubview(isIncludeWorkout)
 	}
 	
 	// MARK: - Public methods
@@ -77,8 +79,8 @@ private extension CurrentMonthDayCell {
 			.left()
 			.right()
 			.bottom(10)
-		currentDayIndicatorView.layer.cornerRadius = currentDayIndicatorView.frame.width / 2
-		currentDayIndicatorView.backgroundColor = .lightGray
+		selectedDayIndicatorView.layer.cornerRadius = selectedDayIndicatorView.frame.width / 2
+		selectedDayIndicatorView.backgroundColor = .lightGray
 		
 		titleLabel
 			.pin
@@ -86,6 +88,13 @@ private extension CurrentMonthDayCell {
 			.left()
 			.right()
 			.bottom(10)
+		
+		isIncludeWorkout
+			.pin
+			.hCenter()
+			.vCenter(20)
+			.width(5)
+			.height(5)
 	}
 	
 	// MARK: - Make Views Methods
@@ -100,7 +109,15 @@ private extension CurrentMonthDayCell {
 	
 	func makeView() -> UIView {
 		let view = UIView()
+		view.backgroundColor = .gray
+		
+		return view
+	}
+	
+	func makePin() -> UIView {
+		let view = UIView()
 		view.backgroundColor = .red
+		view.layer.cornerRadius = 2.5
 		
 		return view
 	}

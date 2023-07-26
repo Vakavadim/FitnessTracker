@@ -9,13 +9,14 @@ import UIKit
 import PinLayout
 import SwiftUI
 
+/// Протокол CalendarViewDelegate
 protocol CalendarViewDelegate: AnyObject {
-	func didSelectedDate() -> Date
+	func didSelectedDate(date: Date)
 }
 
-protocol CalendarViewData {
-	func updateCollectionViewLayout()
-	func dateSelected() -> Date
+/// Протокол CalendarViewDelegate
+protocol CalendarDataSource: AnyObject {
+	func dateSelected()
 }
 
 protocol ICalendarView: AnyObject {
@@ -24,19 +25,30 @@ protocol ICalendarView: AnyObject {
 
 class CalendarView: UIView {
 	
+	// MARK: - Internal properties
+	var calendarAppearance = CalendarAppearance() {
+		didSet {
+			setupCalendarAppearance()
+		}
+	}
+	
+	// MARK: - Dependencies
+
+	weak var delegate: CalendarViewDelegate?
+	
 	// MARK: - Private properties
 	
 	private lazy var dateLabel: UILabel = makeLabel()
 	private lazy var weekDays: UIStackView = makeWeekDaysStack()
 	private lazy var leftCollectionView: UICollectionView = makeCollectionView()
-	private lazy var centerCollectionView: UICollectionView = makeCollectionView()
+	private lazy var centerCollectionView: CurrentMonthCollectionView = makeCurrentMonthCollectionView()
 	private lazy var rightCollectionView: UICollectionView = makeCollectionView()
 	private lazy var resizeButton: UIButton = makeButton()
 	private lazy var scrollView: UIScrollView = makeScrollView()
 	
-	private var presenter: ICalendarPresenter! // swiftlint:disable:this implicitly_unwrapped_optional
+	private var presenter: ICalendarPresenter?
 	private var viewData = CalendarModel.ViewModel(
-			dateString: " ",
+			dateString: "",
 			calendarViewSize: CGRect(),
 			calendarDays: []
 	)
@@ -46,9 +58,10 @@ class CalendarView: UIView {
 	init() {
 		super.init(frame: .zero)
 		assemble()
-		presenter.viewIsReady()
+		presenter?.viewIsReady()
 		setupView()
 		setBounds()
+		setupCalendarAppearance()
 		setupScrollView()
 		self.dateLabel.text = viewData.dateString
 	}
@@ -99,6 +112,10 @@ class CalendarView: UIView {
 	/// Метод setBounds устанваливает значения Bounds для CalendarView в зависимости от значения isWeekCalendar.
 	private func setBounds() {
 		self.bounds = viewData.calendarViewSize
+	}
+	
+	private func setupCalendarAppearance() {
+		dateLabel.textColor = calendarAppearance.accentColor
 	}
 	
 	/// Метод updateCollectionViewLayout обнавляет данные Calendar CollectionView
@@ -153,13 +170,18 @@ class CalendarView: UIView {
 			width: itemWidth * CGFloat(calendarViews.count),
 			height: centerCollectionView.contentSize.height
 		)
+		
+		scrollView.setContentOffset(
+			CGPoint(x: centerCollectionView.frame.midX - scrollView.bounds.width / 2, y: 0),
+			animated: false
+		)
 	}
 	
 	// MARK: - Actions
 	
 	/// Метод changeCalendarSize меняет значение переменной isWeekCalendar,
 	@objc func changeCalendarSize() {
-		presenter.didPressResizeButton()
+		presenter?.didPressResizeButton()
 		setBounds()
 	}
 }
@@ -176,7 +198,14 @@ extension CalendarView: UICollectionViewDelegate, UICollectionViewDataSource {
 			indexPath: indexPath,
 			model: self.viewData.calendarDays[indexPath.item]
 		)
+
 		return cell
+	}
+	
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		guard let date = self.presenter?.didSelectedDate(indexPath: indexPath) else { return }
+		self.dateLabel.text = viewData.dateString
+		self.delegate?.didSelectedDate(date: date)
 	}
 }
 
@@ -227,7 +256,7 @@ private extension CalendarView {
 	func layout() {
 		dateLabel
 			.pin
-			.top(Sizes.Padding.biggest)
+			.top(Sizes.Padding.normal)
 			.left(Sizes.Padding.normal)
 			.sizeToFit()
 		
@@ -282,12 +311,12 @@ extension CalendarView: UIScrollViewDelegate {
 
 		if (self.rightCollectionView.frame.maxX - gap) < currentRightOffset {
 			scrollView.contentOffset.x -= self.centerCollectionView.frame.width + spacing
-			presenter.forward()
+			presenter?.forward()
 			self.dateLabel.text = viewData.dateString
 			centerCollectionView.reloadData()
 		} else if (self.leftCollectionView.frame.minX + gap) > scrollView.contentOffset.x {
 			scrollView.contentOffset.x += self.centerCollectionView.frame.width + spacing
-			presenter.back()
+			presenter?.back()
 			self.dateLabel.text = viewData.dateString
 			centerCollectionView.reloadData()
 		}
@@ -314,7 +343,6 @@ class TestViewController: UIViewController {
 			.top()
 			.left()
 			.right()
-//		calendarView.updateCollectionViewLayout()
 	}
 }
 

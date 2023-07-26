@@ -9,7 +9,7 @@ import Foundation
 
 protocol ICalendarPresenter {
 	func viewIsReady()
-	func didSelectedDate(indexPath: IndexPath)
+	func didSelectedDate(indexPath: IndexPath) -> Date
 	func didPressResizeButton()
 	func back()
 	func forward()
@@ -19,7 +19,7 @@ class CalendarPresenter: ICalendarPresenter {
 	
 	// MARK: - Private properties
 	
-	private var isWeekCalendar = false
+	private var isWeekCalendar = true
 	private var selectedDate: Date?
 	private var date: Date?
 	private let calendarManager: ICalendarManager
@@ -42,7 +42,27 @@ class CalendarPresenter: ICalendarPresenter {
 		view.render(viewData: mapViewData(date: date))
 	}
 	
-	func didSelectedDate(indexPath: IndexPath) {
+	func didSelectedDate(indexPath: IndexPath) -> Date {
+		guard let date = self.date else {
+			fatalError("Date is not found")
+		}
+		let cellData = mapCellData(date: date)
+		switch cellData[indexPath.item] {
+		case .currentMonthDay(let dayData):
+			let date = dayData.date
+			selectedDate = date
+			viewIsReady()
+			return date
+		case .otherMonthDay(let dayData):
+			let date = dayData.date
+			selectedDate = date
+			if indexPath.item < 7 {
+				back()
+			} else {
+				forward()
+			}
+			return date
+		}
 	}
 	
 	func didPressResizeButton() {
