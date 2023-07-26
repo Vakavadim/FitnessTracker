@@ -19,7 +19,7 @@ class CalendarPresenter: ICalendarPresenter {
 	
 	// MARK: - Private properties
 	
-	private var isWeekCalendar = false
+	private var isWeekCalendar = true
 	private var selectedDate: Date?
 	private var date: Date?
 	private let calendarManager: ICalendarManager

@@ -10,6 +10,7 @@
 		E0021CE92A3B81C5000E1120 /* ICoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0021CE82A3B81C5000E1120 /* ICoordinator.swift */; };
 		E0021CEB2A3B81FD000E1120 /* Flow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0021CEA2A3B81FD000E1120 /* Flow.swift */; };
 		E0021CED2A3B824F000E1120 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0021CEC2A3B824F000E1120 /* AppCoordinator.swift */; };
+		E00546DB2A6F324C00EB7449 /* CalendarAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00546DA2A6F324C00EB7449 /* CalendarAppearance.swift */; };
 		E007B52F29BA3AC000833E5F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = E007B52E29BA3AC000833E5F /* README.md */; };
 		E02119B62A20CFE400038455 /* CalendarView+MakeUIObjectMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02119B52A20CFE400038455 /* CalendarView+MakeUIObjectMethods.swift */; };
 		E02E21E72A657A5800A073BD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02E21E62A657A5800A073BD /* User.swift */; };
@@ -115,6 +116,7 @@
 		E0021CE82A3B81C5000E1120 /* ICoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICoordinator.swift; sourceTree = "<group>"; };
 		E0021CEA2A3B81FD000E1120 /* Flow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flow.swift; sourceTree = "<group>"; };
 		E0021CEC2A3B824F000E1120 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		E00546DA2A6F324C00EB7449 /* CalendarAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAppearance.swift; sourceTree = "<group>"; };
 		E007B52E29BA3AC000833E5F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E02119B52A20CFE400038455 /* CalendarView+MakeUIObjectMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CalendarView+MakeUIObjectMethods.swift"; sourceTree = "<group>"; };
 		E02E21E62A657A5800A073BD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -493,6 +495,7 @@
 			isa = PBXGroup;
 			children = (
 				E0A76A0B2A23BDE50037602F /* CurrentMonthCollectionView.swift */,
+				E00546DA2A6F324C00EB7449 /* CalendarAppearance.swift */,
 			);
 			path = CurrentMonthCollectionView;
 			sourceTree = "<group>";
@@ -800,6 +803,7 @@
 				E0775FAC2A6EDF37008190CC /* ExercisesAssembler.swift in Sources */,
 				E0021CEB2A3B81FD000E1120 /* Flow.swift in Sources */,
 				E0B233952A563D0100658D62 /* PlainButton.swift in Sources */,
+				E00546DB2A6F324C00EB7449 /* CalendarAppearance.swift in Sources */,
 				E0E2F37D29CA1C0C004A7616 /* Exercise.swift in Sources */,
 				E068096329CC943800609443 /* WorkoutManager.swift in Sources */,
 				E02E21EB2A657BC400A073BD /* AuthResult.swift in Sources */,

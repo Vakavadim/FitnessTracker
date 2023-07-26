@@ -16,21 +16,21 @@ enum Sizes {
 	static let topOffset: Percent = 30%
 	
 	enum CalendarView {
-		static let weekHeight: CGFloat = 190
-		static let mounthHeight: CGFloat = 450
+		static let weekHeight: CGFloat = 160
+		static let mounthHeight: CGFloat = 410
 		static let numberOfColumns: CGFloat = 7
 		static let numberOfInsections: CGFloat = 6
 		static let mounthViewSize = CGRect(
 			x: 0,
 			y: 0,
 			width: UIScreen.main.bounds.width,
-			height: 450
+			height: mounthHeight
 		)
 		static let weekViewSize = CGRect(
 			x: 0,
 			y: 0,
 			width: UIScreen.main.bounds.width,
-			height: 200
+			height: weekHeight
 		)
 		
 		enum S { // swiftlint:disable:this type_name

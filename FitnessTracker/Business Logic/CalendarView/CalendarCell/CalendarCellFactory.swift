@@ -7,7 +7,20 @@
 
 import UIKit
 
+
+/// Класс CalendarCellFactory представляет шаблон фабрики, который упрощает создание и конфигурацию
+/// ячеек календаря, скрывая детали реализации от внешних компонентов и обеспечивая единый интерфейс
+/// для работы с различными типами ячеек.
 final class CalendarCellFactory { // swiftlint:disable:this convenience_type
+	
+	/// метод cellForCollectionView создает и возвращает соответствующую ячейку (UICollectionViewCell)
+	/// для определенного типа данных CalendarModel.CellData и
+	/// определенного местоположения (indexPath) в коллекции UICollectionView.
+	/// - Parameters:
+	///   - collectionView: Коллекция ячеек UICollectionView, для которой необходимо создать ячейку.
+	///   - indexPath: Индекс ячейки в коллекции.
+	///   - model: CalendarModel.CellData - данные, используемые для конфигурации ячейки.
+	/// - Returns: Метод возвращает требуемый тип ячейки CurrentMonthDayCell для дня текущего месяца и OtherMonthDayCell для других дней.
 	static func cellForCollectionView(
 		_ collectionView: UICollectionView,
 		indexPath: IndexPath,
@@ -30,6 +43,14 @@ final class CalendarCellFactory { // swiftlint:disable:this convenience_type
 		}
 	}
 
+	
+	/// метод cellForCurrentMonthDay является частью фабрики CalendarCellFactory,
+	/// его цель - создать и настроить ячейку типа CurrentMonthDayCell для текущего месяца в календаре.
+	/// - Parameters:
+	///   - collectionView: Коллекция ячеек UICollectionView, из которой будет получена переиспользуемая ячейка.
+	///   - indexPath: Индекс ячейки в коллекции, для которой необходимо получить ячейку.
+	///   - dayData: данные для конфигурации ячейки текущего дня (CurrentMonthDayCell).
+	/// - Returns: Метод возвращает настроенную ячейку cell, которая будет использована в методе cellForCollectionView для отображения текущего дня календаря.
 	private static func cellForCurrentMonthDay(
 		_ collectionView: UICollectionView,
 		indexPath: IndexPath,
@@ -46,6 +67,13 @@ final class CalendarCellFactory { // swiftlint:disable:this convenience_type
 		return cell
 	}
 
+	/// метод cellForOtherMonthDay является частью фабрики CalendarCellFactory,
+	/// его цель - создать и настроить ячейку типа OtherMonthDayCell для текущего месяца в календаре.
+	/// - Parameters:
+	///   - collectionView: Коллекция ячеек UICollectionView, из которой будет получена переиспользуемая ячейка.
+	///   - indexPath: Индекс ячейки в коллекции, для которой необходимо получить ячейку.
+	///   - dayData: данные для конфигурации ячейки текущего дня (OtherMonthDayCell).
+	/// - Returns: Метод возвращает настроенную ячейку cell, которая будет использована в методе cellForCollectionView для отображения текущего дня календаря.
 	private static func cellForOtherMonthDay(
 		_ collectionView: UICollectionView,
 		indexPath: IndexPath,

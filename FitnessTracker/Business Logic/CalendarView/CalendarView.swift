@@ -25,6 +25,13 @@ protocol ICalendarView: AnyObject {
 
 class CalendarView: UIView {
 	
+	// MARK: - Internal properties
+	var calendarAppearance = CalendarAppearance() {
+		didSet {
+			setupCalendarAppearance()
+		}
+	}
+	
 	// MARK: - Dependencies
 
 	weak var delegate: CalendarViewDelegate?
@@ -54,6 +61,7 @@ class CalendarView: UIView {
 		presenter?.viewIsReady()
 		setupView()
 		setBounds()
+		setupCalendarAppearance()
 		setupScrollView()
 		self.dateLabel.text = viewData.dateString
 	}
@@ -104,6 +112,10 @@ class CalendarView: UIView {
 	/// Метод setBounds устанваливает значения Bounds для CalendarView в зависимости от значения isWeekCalendar.
 	private func setBounds() {
 		self.bounds = viewData.calendarViewSize
+	}
+	
+	private func setupCalendarAppearance() {
+		dateLabel.textColor = calendarAppearance.accentColor
 	}
 	
 	/// Метод updateCollectionViewLayout обнавляет данные Calendar CollectionView
@@ -244,7 +256,7 @@ private extension CalendarView {
 	func layout() {
 		dateLabel
 			.pin
-			.top(Sizes.Padding.biggest)
+			.top(Sizes.Padding.normal)
 			.left(Sizes.Padding.normal)
 			.sizeToFit()
 		
